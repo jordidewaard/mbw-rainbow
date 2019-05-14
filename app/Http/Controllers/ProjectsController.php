@@ -101,9 +101,8 @@ class ProjectsController extends Controller
         $project->title = $request->input('title');
         $project->description = $request->input('description');
         $project->save(); 
-
-       
-        return redirect('/projects')->with('success', 'Project is al bijgewerkt');
+        
+        return redirect('/projects')->with('success', 'Project is bijgewerkt');
     }
 
     /**
@@ -118,6 +117,6 @@ class ProjectsController extends Controller
         
         $project->delete();
         
-        return redirect('/projects')->with('success', 'Project is al verwijderd');
+        return redirect('/projects')->with('success', 'Project is verwijderd');
     }
 }
