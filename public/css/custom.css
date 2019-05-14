@@ -1,4 +1,4 @@
-
+	
 nav{
     border-bottom: 2px solid #aaaa;
     background: #2c3e50;
@@ -31,13 +31,16 @@ nav{
 }
 
 .hpBlocks{
-	margin-top: 30px;
 	text-align: center;
-	font-size: x-large;
+	font-size: 1.6rem;
 }
 
 .hpBlocks a {
 	color: #fff;
+}
+
+.col-sm-3{
+		margin-top: 30px;
 }
 
 .bg-Green{
