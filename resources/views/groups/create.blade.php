@@ -3,19 +3,19 @@
 @section('content')
 
 <div class="container">
-    <h3>Project Maken</h3><br>
-    {!! Form::open(['action' => 'ProjectsController@store', 'method' => 'POST']) !!} 
+    <h3>Group Maken</h3><br>
+    {!! Form::open(['action' => 'GroupsController@store', 'method' => 'POST']) !!} 
     @csrf
 
     <div class="form-group">
-         {{Form::label('title', 'Titel')}}
-         {{Form::text('title','', ['class' => 'form-control', 'placeholder' => 'Titel...', 'required' => 'autofocus'])}}
+         {{Form::label('title', 'Naam')}}
+         {{Form::text('title','', ['class' => 'form-control', 'placeholder' => 'Group naam...', 'required' => 'autofocus'])}}
         </div>
         <div class="form-group">
           {{Form::label('description', 'Omschrijving')}}
           {!!Form::textarea('description','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Omschrijving...', 'required' => 'autofocus'])!!}
         </div>
-          {{Form::submit('Creëren', ['class' =>'btn btn-outline-primary'])}}
+          {{Form::submit('Submit', ['class' =>'btn btn-outline-primary'])}}
     {!! Form::close() !!} 
   </div>
 @endsection

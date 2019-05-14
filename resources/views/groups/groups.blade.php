@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Alle Projecten</div>
+                <div class="card-header">Alle Groupen</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,9 +14,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="/projects/create" class="btn btn-outline-primary">Project Maken</a><br><br>
-                    <h4>Alle Projecten</h4>
-                        @if(count($projects) > 0)
+                    <a href="/groups/create" class="btn btn-outline-primary">Group Maken</a><br><br>
+                    <h4>Alle Groupen</h4>
+                        @if(count($groups) > 0)
 
                         <table class="table table-striped">
                                 <tr>
@@ -25,14 +25,14 @@
                                     <th class="text-right">Actie</th>
                                 </tr>
 
-                            @foreach ($projects as $project)
+                            @foreach ($groups as $group)
                                 <tr>
-                                    <td><a href="/projects/view/{{$project->id}}">{{$project->title}}</a></td>
-                                    <td>{{$project->created_at}}</td>
+                                    <td><a href="/groups/view/{{$group->id}}">{{$group->title}}</a></td>
+                                    <td>{{$group->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit">Edit</a>
-                                            {!!Form::open(['action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
+                                            <a class="btn btn-outline-success a-fix-table" href="/groups/{{$group->id}}/edit">Edit</a>
+                                            {!!Form::open(['action' => ['GroupsController@destroy', $group->id], 'method' => 'POST'])!!}
                                             @csrf
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-outline-danger'])}}
@@ -43,7 +43,7 @@
                             @endforeach
                         </table> 
                         @else
-                        <p>Er is nog geen projecten</p> 
+                        <p>Er is nog geen groupen</p> 
                     @endif 
                 </div>
             </div>
