@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
-use App\Project;
-use App\User;
+use App\Group;
 
-class ProjectsController extends Controller
+class GroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('updated_at', 'desc')->paginate(12);
-        return view('projects.projects')->with('projects', $projects);
+        $groups = Group::orderBy('updated_at', 'desc')->paginate(12);
+        return view('groups.groups')->with('groups', $groups);
     }
 
     /**
@@ -28,7 +27,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('groups.create');
     }
 
     /**
@@ -45,79 +44,78 @@ class ProjectsController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('projects/create')
+            return redirect('groups/create')
             ->withErrors($validator)
             ->withInput();
         }
 
-        $project = new Project;
-        $project->title = $request->input('title');
-        $project->description = $request->input('description');
-        $project->save();
+        $group = new Group;
+        $group->title = $request->input('title');
+        $group->description = $request->input('description');
+        $group->save();
 
-        return redirect('/projects')->with('success', 'je project is al gemaakt');
+        return redirect('/groups')->with('success', 'je group is al gemaakt');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $project = Project::find($id);
-        return view('projects.view')->with('project', $project);
+        $group = Group::find($id);
+        return view('groups.view')->with('group', $group);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $project = Project::find($id);
-        return view('projects.edit')->with('project', $project);
+        $group = Group::find($id);
+        return view('groups.edit')->with('group', $group);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required'
         ]);
 
-        $project = Project::find($id);
-        $project->title = $request->input('title');
-        $project->description = $request->input('description');
-        $project->save(); 
+        $group = Group::find($id);
+        $group->title = $request->input('title');
+        $group->description = $request->input('description');
+        $group->save(); 
 
        
-        return redirect('/projects')->with('success', 'Project is al bijgewerkt');
+        return redirect('/groups')->with('success', 'Group is al bijgewerkt');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Project  $project
+     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $project = Project::find($id);
+        $group = Group::find($id);
         
-        $project->delete();
+        $group->delete();
         
-        return redirect('/projects')->with('success', 'Project is al verwijderd');
+        return redirect('/groups')->with('success', 'Group is al verwijderd');
     }
 }
