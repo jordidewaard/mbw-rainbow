@@ -29,3 +29,33 @@ nav{
 {
     margin-right: 10px;
 }
+
+.hpBlocks{
+	margin-top: 30px;
+	text-align: center;
+	font-size: x-large;
+}
+
+.hpBlocks a {
+	color: #fff;
+}
+
+.bg-Green{
+	background-color: #00b894;
+}
+
+.bg-Blue{
+	background-color: #74b9ff;
+}
+
+.bg-Purple{
+	background-color: #a29bfe;
+}
+
+.bg-Red{
+	background-color: #ff7675;
+}
+
+.bg-Yellow{
+	background-color: #fdcb6e;
+}
