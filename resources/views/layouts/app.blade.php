@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Op Stage') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -29,6 +28,8 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ asset('/js/app.js') }}"></script>
 
     <script>window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function(){
