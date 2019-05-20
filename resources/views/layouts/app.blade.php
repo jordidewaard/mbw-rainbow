@@ -23,7 +23,9 @@
     <div id="app">
         <main class="main container-fluid">
             @include('layouts.navbar')
-            @include('layouts.messages')
+               <div class="container">
+                   @include('layouts.messages')
+               </div>
             <br>
             @yield('content')
         </main>

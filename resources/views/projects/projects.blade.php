@@ -9,12 +9,6 @@
                 <div class="card-header">Alle Projecten</div>
 
                 <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
                     <a href="/projects/create" class="btn btn-outline-primary">Project Maken</a><br><br>
                     <h4>Alle Projecten</h4>
                         @if(count($projects) > 0)

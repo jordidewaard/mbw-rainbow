@@ -9,11 +9,6 @@
                 <div class="card-header">Alle Groupen</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
                     <a href="/groups/create" class="btn btn-outline-primary">Group Maken</a><br><br>
                     <h4>Alle Groupen</h4>
                         @if(count($groups) > 0)
