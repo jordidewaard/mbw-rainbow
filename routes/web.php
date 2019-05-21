@@ -10,20 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => true]);
+
 
 Route::get('/', function () {
     return view('pages.welcome');
 });
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/projects', 'ProjectsController');
 Route::get('/projects/view/{id}', 'ProjectsController@show');
 
 Route::resource('/groups', 'GroupsController');
 Route::get('/groups/view/{id}', 'GroupsController@show');
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/teachers', 'HomeController@teacher');
 Route::get('/students', 'HomeController@student');
