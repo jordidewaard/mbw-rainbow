@@ -10,7 +10,6 @@
 
                 <div class="card-body">
                     <a href="/projects/create" class="btn btn-outline-primary">Project Maken</a><br><br>
-                    <h4>Alle Projecten</h4>
                         @if(count($projects) > 0)
 
                         <table class="table table-striped">
@@ -26,11 +25,11 @@
                                     <td>{{$project->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit">Edit</a>
+                                            <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit">Bewerken</a>
                                             {!!Form::open(['action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
                                             @csrf
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Delete', ['class' => 'btn btn-outline-danger'])}}
+                                            {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
                                             {!!Form::close()!!}
                                         </div>
                                     </td>

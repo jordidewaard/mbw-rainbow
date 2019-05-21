@@ -6,11 +6,10 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Alle Groupen</div>
+                <div class="card-header">Alle Groepen</div>
 
                 <div class="card-body">
-                    <a href="/groups/create" class="btn btn-outline-primary">Group Maken</a><br><br>
-                    <h4>Alle Groupen</h4>
+                    <a href="/groups/create" class="btn btn-outline-primary">Groep Maken</a><br><br>
                         @if(count($groups) > 0)
 
                         <table class="table table-striped">
@@ -26,11 +25,11 @@
                                     <td>{{$group->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/groups/{{$group->id}}/edit">Edit</a>
+                                            <a class="btn btn-outline-success a-fix-table" href="/groups/{{$group->id}}/edit">Bewerken</a>
                                             {!!Form::open(['action' => ['GroupsController@destroy', $group->id], 'method' => 'POST'])!!}
                                             @csrf
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Delete', ['class' => 'btn btn-outline-danger'])}}
+                                            {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
                                             {!!Form::close()!!}
                                         </div>
                                     </td>
@@ -38,7 +37,7 @@
                             @endforeach
                         </table> 
                         @else
-                        <p>Er is nog geen groupen</p> 
+                        <p>Er is nog geen groepen</p> 
                     @endif 
                 </div>
             </div>

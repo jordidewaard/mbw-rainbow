@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Project Bewerk</h2><br>
+    <h2>Project Bewerken</h2><br>
     {!! Form::open(['action' => ['ProjectsController@update', $project->id], 'method' => 'POST']) !!} 
     @csrf
 
@@ -17,7 +17,7 @@
         </div>
         
           {{Form::hidden('_method', 'PUT')}}
-          {{Form::submit('Submit', ['class' =>'btn btn-outline-primary'])}}
+          {{Form::submit('Project Bewerken', ['class' =>'btn btn-outline-primary'])}}
     {!! Form::close() !!} 
   </div>
 @endsection
