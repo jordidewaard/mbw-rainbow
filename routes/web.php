@@ -21,7 +21,7 @@ Route::get('/projects/view/{id}', 'ProjectsController@show');
 Route::resource('/groups', 'GroupsController');
 Route::get('/groups/view/{id}', 'GroupsController@show');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
