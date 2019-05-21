@@ -25,4 +25,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/teachers', 'HomeController@teacher');
+Route::get('/students', 'HomeController@student');
+Route::get('/clients', 'HomeController@client');
+
+
+
 
