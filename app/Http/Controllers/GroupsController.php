@@ -54,7 +54,7 @@ class GroupsController extends Controller
         $group->description = $request->input('description');
         $group->save();
 
-        return redirect('/groups')->with('success', 'je group is al gemaakt');
+        return redirect('/groups')->with('success', 'je groep is al gemaakt');
     }
 
     /**
@@ -101,7 +101,7 @@ class GroupsController extends Controller
         $group->save(); 
 
        
-        return redirect('/groups')->with('success', 'Group is al bijgewerkt');
+        return redirect('/groups')->with('success', 'Groep is al bijgewerkt');
     }
 
     /**
@@ -116,6 +116,6 @@ class GroupsController extends Controller
         
         $group->delete();
         
-        return redirect('/groups')->with('success', 'Group is al verwijderd');
+        return redirect('/groups')->with('success', 'Groep is al verwijderd');
     }
 }
