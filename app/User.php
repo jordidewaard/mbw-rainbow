@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const Admin_role = 'a';
+    const Client_role = 'c';
+    const Student_role = 's';
+
+    public function isAdmin(){
+        return $this->role === slef::Admin_role;
+    }
+
+    public function isClient(){
+        return $this->role === slef::Client_role;
+    }
+
+    public function isStudent(){
+        return $this->role === slef::Student_role;
+    }
 }
