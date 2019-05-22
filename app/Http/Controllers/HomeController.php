@@ -26,18 +26,4 @@ class HomeController extends Controller
         return view('pages.home');
     }
 
-    public function teacher()
-    {
-        return view('teachers.teachers');
-    }
-
-    public function student()
-    {
-        return view('students.students');
-    }
-
-    public function client()
-    {
-        return view('clients.clients');
-    }
 }
