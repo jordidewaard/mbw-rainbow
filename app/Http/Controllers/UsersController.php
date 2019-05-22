@@ -15,6 +15,22 @@ class UsersController extends Controller
     {
         $users = Project::orderBy('updated_at', 'desc')->paginate(12);
         return view('users.users')->with('users', $users);
+
+    }
+
+    public function teacher()
+    {
+        return view('teachers.teachers');
+    }
+
+    public function student()
+    {
+        return view('students.students');
+    }
+
+    public function client()
+    {
+        return view('clients.clients');
     }
 
     /**
