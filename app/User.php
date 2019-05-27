@@ -47,14 +47,14 @@ class User extends Authenticatable implements MustVerifyEmail
     const Student_role = 's';
 
     public function isAdmin(){
-        return $this->role === slef::Admin_role;
+        return $this->role === self::Admin_role;
     }
 
     public function isClient(){
-        return $this->role === slef::Client_role;
+        return $this->role === self::Client_role;
     }
 
     public function isStudent(){
-        return $this->role === slef::Student_role;
+        return $this->role === self::Student_role;
     }
 }

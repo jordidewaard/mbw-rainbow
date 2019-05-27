@@ -27,9 +27,10 @@ Route::get('/groups/view/{id}', 'GroupsController@show');
 
 Route::resource('/users', 'UsersController');
 
+Route::resource('/students', 'StudentsController');
+Route::get('/students/view/{id}', 'StudentsController@show');
 
 Route::get('/teachers', 'UsersController@teacher');
-Route::get('/students', 'UsersController@student');
 Route::get('/clients', 'UsersController@client');
 
 

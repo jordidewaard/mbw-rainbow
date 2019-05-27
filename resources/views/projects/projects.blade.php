@@ -3,6 +3,10 @@
 @section('content')
 
 <div class="container">
+    <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
+
+    <br><br>
+    
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -14,9 +18,9 @@
 
                         <table class="table table-striped">
                                 <tr>
-                                    <th>Titel</th>
-                                    <th>Datum</th>
-                                    <th class="text-right">Actie</th>
+                                    <th><h4>Titel</h4></th>
+                                    <th><h4>Datum</h4></th>
+                                    <th class="text-right"><h4>Actie</h4></th>
                                 </tr>
 
                             @foreach ($projects as $project)

@@ -14,9 +14,9 @@
 
                         <table class="table table-striped">
                                 <tr>
-                                    <th>Titel</th>
-                                    <th>Datum</th>
-                                    <th class="text-right">Actie</th>
+                                    <th><h4>Titel</h4></th>
+                                    <th><h4>Datum</h4></th>
+                                    <th class="text-right"><h4>Actie</h4></th>
                                 </tr>
 
                             @foreach ($groups as $group)
