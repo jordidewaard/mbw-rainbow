@@ -29,11 +29,12 @@
                                     <td>{{$project->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit">Bewerken</a>
+                                            <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             {!!Form::open(['action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
                                             @csrf
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
+
+                                            {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
                                             {!!Form::close()!!}
                                         </div>
                                     </td>

@@ -37,11 +37,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
-    // public function myProject(){
-    //     return $this->hasMany('App\MyProject');
-    // }
-
     const Admin_role = 'a';
     const Client_role = 'c';
     const Student_role = 's';
@@ -56,5 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isStudent(){
         return $this->role === self::Student_role;
+    }
+
+    public function projects(){
+        return $this->belongsToMany('App\Project');
     }
 }

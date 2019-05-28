@@ -28,19 +28,18 @@
                                     <td>studentnummer</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/students/{{$student->id}}/edit">Bewerken</a>
+                                            <a class="btn btn-outline-success a-fix-table" href="/students/{{$student->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
                                             @csrf
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
-                                            {!!Form::close()!!}
+                                            {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
                                         </div>
                                     </td>
                                 </tr> 
                             @endforeach
                         </table> 
                         @else
-                        <p>Er is nog geen students</p> 
+                        <p>Er zijn nog geen studenten</p> 
                     @endif 
                 </div>
             </div>

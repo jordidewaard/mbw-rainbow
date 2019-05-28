@@ -3,6 +3,10 @@
 @section('content')
 
 <div class="container">
+    <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
+
+    <br><br>
+
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -25,11 +29,11 @@
                                     <td>{{$group->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/groups/{{$group->id}}/edit">Bewerken</a>
+                                            <a class="btn btn-outline-success a-fix-table" href="/groups/{{$group->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                             {!!Form::open(['action' => ['GroupsController@destroy', $group->id], 'method' => 'POST'])!!}
                                             @csrf
-                                            {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
+                                               {{Form::hidden('_method', 'DELETE')}}
+                                               {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
                                             {!!Form::close()!!}
                                         </div>
                                     </td>

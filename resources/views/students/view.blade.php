@@ -19,15 +19,15 @@
           <br>
           <div>
               <div class="btn-group" role="group" aria-label="First group">
-                <a class="btn btn-outline-success" href="/students/{{$student->id}}/edit" class="">Bewerken</a>
+                <a class="btn btn-outline-success" href="/students/{{$student->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
               </div>
 
               <div class="btn-group" role="group" aria-label="Second group">
                   {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
                   @csrf
                     {{Form::hidden('_method', 'DELETE')}}
-                    {{Form::submit('Verwijderen', ['class' => 'btn btn-outline-danger'])}}
-                  {!!Form::close()!!}
+                    {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
+                    {!!Form::close()!!}
               </div>
           </div>
         </div>

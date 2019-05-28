@@ -1,4 +1,7 @@
-	
+body{
+	font-family: 'Forum', cursive;
+}	
+
 nav{
     border-bottom: 2px solid #aaaa;
     background: #2c3e50;
