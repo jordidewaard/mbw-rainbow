@@ -14,7 +14,6 @@ class CreateProjectUserTable extends Migration
     public function up()
     {
         Schema::create('project_user', function (Blueprint $table) {
-            $table->increments('id');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -34,9 +33,9 @@ class CreateProjectUserTable extends Migration
     public function down()
     {
         Schema::table('project_user', function (Blueprint $table) {
-            $table->dropIfExists('project_user_id_foreign');
-            $table->dropColumn('user_id');
-            $table->dropColumn('project_id');
+            $table->dropForeign('user_id');
+            $table->dropForeign('project_id');
+            $table->dropColumn(['project_id', 'user_id']);
         });
     }
 }
