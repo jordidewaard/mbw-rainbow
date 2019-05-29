@@ -33,6 +33,10 @@ class CreateProjectUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_user');
+        Schema::table('project_user', function (Blueprint $table) {
+            $table->dropIfExists('project_user_id_foreign');
+            $table->dropColumn('user_id');
+            $table->dropColumn('project_id');
+        });
     }
 }

@@ -39,7 +39,7 @@
                             @endforeach
                         </table> 
                         @else
-                        <p>Er zijn nog geen studenten</p> 
+                        <p>Er zijn geen studenten</p> 
                     @endif 
                 </div>
             </div>

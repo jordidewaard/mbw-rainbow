@@ -120,9 +120,15 @@ class ProjectsController extends Controller
         return redirect('/projects')->with('success', 'Project is verwijderd');
     }
 
-    public function studentAdding($id)
+    public function studentProjectAdding($id)
     {
         $student = User::find($id);
         $student->projects()->attach($project_id);
+    }
+
+    public function studentProjectDelete($id)
+    {
+        $student = User::find($id);
+        $student->projects()->detach($project_id);
     }
 }

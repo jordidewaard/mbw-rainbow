@@ -42,7 +42,7 @@
                             @endforeach
                         </table> 
                         @else
-                        <p>Er is nog geen projecten</p> 
+                        <p>Er zijn geen projecten</p> 
                     @endif 
                 </div>
             </div>

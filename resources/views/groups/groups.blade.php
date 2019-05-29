@@ -41,7 +41,7 @@
                             @endforeach
                         </table> 
                         @else
-                        <p>Er is nog geen groepen</p> 
+                        <p>Er zijn geen groepen</p> 
                     @endif 
                 </div>
             </div>
