@@ -7,6 +7,7 @@ use Validator;
 use DB;
 use App\Project;
 use App\User;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjectsController extends Controller
 {
@@ -124,10 +125,25 @@ class ProjectsController extends Controller
         return redirect('/projects')->with('success', 'Project is verwijderd');
     }
 
-    public function studentProjectAdding($id)
-    {
-        // $student = User::find($id);
-        $student->projects()->attach($project_id);
+    public function addStudentsToProject($id)
+    {   
+        $project = Project::find($id);
+        $students = User::all()->where('role', '=', 'S');
+        return view('students.students', compact('project', 'students'));
+    }
+
+    public function addStudent(Project $project, User $student){
+
+        //check of de student al gekoppeld is aan het project. 
+        //als deze al gekoppeld is hoef ik deze niet nog een keer toe te voegen
+        //is deze student nog niet toegevoegd wil ik deze wel koppelen.
+
+        if(!$project->users->contains($student->id)){
+            $project->users()->attach($student->id);
+        } else {
+            return Redirect::back()->withErrors('De student ' . $student->name . ' is al gekoppeld aan het project ' . $project->title);
+        }
+        return redirect()->back();
     }
 
     public function studentProjectDelete($id)

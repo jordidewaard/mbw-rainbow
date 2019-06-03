@@ -27,7 +27,7 @@
                             @foreach ($students as $student)
                             <tbody>
                                 <tr>
-                                    <td><a class="btn btn-outline-success" href="/studentAdding/{{$project->id}}">Toevoegen</a></td>
+                                    <td><a class="btn btn-outline-success" href="/project/{{$project->id}}/addstudent/{{$student->id}}">Toevoegen</a></td>
                                     <td><a href="/students/view/{{$student->id}}">{{$student->name}}</a></td>
                                     <td>studentnummer</td>
                                 </tr> 

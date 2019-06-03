@@ -5,7 +5,7 @@
 <div class="container">
 
 <a href="/projects" class="btn btn-outline-secondary">Terug</a>
-<a href="/students" class="btn btn-outline-primary row-fix">Student toevoegen</a>
+<a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix">Student toevoegen</a>
 <br><br>
 
       <div>
