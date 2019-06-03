@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/projects', 'ProjectsController');
 Route::get('/projects/view/{id}', 'ProjectsController@show');
 
+Route::get('/studentAdding/{id}', 'ProjectsController@studentProjectAdding');
+
 Route::resource('/groups', 'GroupsController');
 Route::get('/groups/view/{id}', 'GroupsController@show');
 

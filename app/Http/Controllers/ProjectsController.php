@@ -54,6 +54,10 @@ class ProjectsController extends Controller
         $project->title = $request->input('title');
         $project->description = $request->input('description');
         $project->save();
+        $user = User::find('id');
+        $project->users()->attach($user);
+    
+
 
         return redirect('/projects')->with('success', 'je project is al gemaakt');
     }
@@ -122,7 +126,7 @@ class ProjectsController extends Controller
 
     public function studentProjectAdding($id)
     {
-        $student = User::find($id);
+        // $student = User::find($id);
         $student->projects()->attach($project_id);
     }
 

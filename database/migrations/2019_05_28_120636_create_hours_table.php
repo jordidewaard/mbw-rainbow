@@ -14,17 +14,18 @@ class CreateHoursTable extends Migration
     public function up()
     {
         Schema::create('hours', function (Blueprint $table) {
-            $table->increments('id');
 
             $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->primary(['project_id', 'user_id']);
 
             $table->date('date');
             $table->integer('hours');
-            $table->string('Description');
+            $table->mediumText('Description');
 
             $table->timestamps();
         });
@@ -38,9 +39,7 @@ class CreateHoursTable extends Migration
     public function down()
     {
         Schema::table('hours', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['project_id']);
-
+            $table->dropForeign(['user_id', 'project_id']);
             $table->dropColumn(['project_id', 'user_id']);
         });
     }

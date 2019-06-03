@@ -15,27 +15,23 @@
                 <div class="card-body">
                         @if(count($students) > 0)
 
-                        <table class="table table-striped">
-                                <tr>
+                        <table class="table table-borderd table-hover">
+                            <thead class="table-primary">
+                                <tr class="active">
+                                    <th><h4>Actie</h4></th>
                                     <th><h4>Naam</h4></th>
                                     <th><h4>Studentnummer</h4></th>
-                                    <th class="text-right"><h4>Actie</h4></th>
                                 </tr>
+                            </thead>
 
                             @foreach ($students as $student)
+                            <tbody>
                                 <tr>
+                                    <td><a class="btn btn-outline-success" href="/studentAdding/{{$project->id}}">Toevoegen</a></td>
                                     <td><a href="/students/view/{{$student->id}}">{{$student->name}}</a></td>
                                     <td>studentnummer</td>
-                                    <td>
-                                        <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/students/{{$student->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
-                                            @csrf
-                                            {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
-                                        </div>
-                                    </td>
                                 </tr> 
+                            </tbody>
                             @endforeach
                         </table> 
                         @else
