@@ -5,7 +5,7 @@
 <div class="container">
 
 <a href="/projects" class="btn btn-outline-secondary">Terug</a>
-<a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix">Student toevoegen</a>
+<a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix">Student Toevoegen/Verwijderen</a>
 <br><br>
 
     <div>
@@ -20,7 +20,11 @@
             <h3>Studenten in dit project</h3>
             <ul>
                 @foreach ($project->users as $user)
-                    <li>{{ $user->name }}</li>
+                    @if($user->name > 0)
+                        <li>{{ $user->name }}</li>
+                        @else
+                            <?php echo"Er zijn nog geen studenten aan dit project gekoppeld"?>
+                    @endif
                 @endforeach
             </ul>
         </div>    
