@@ -25,6 +25,7 @@ Route::get('/projects/view/{id}', 'ProjectsController@show');
 Route::get('/studentAdding/{id}', 'ProjectsController@studentProjectAdding');
 Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
 Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
+Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
 
 Route::resource('/groups', 'GroupsController');
 Route::get('/groups/view/{id}', 'GroupsController@show');

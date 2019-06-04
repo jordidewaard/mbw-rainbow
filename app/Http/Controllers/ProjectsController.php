@@ -72,7 +72,8 @@ class ProjectsController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        return view('projects.view')->with('project', $project);
+        $users = User::with('projects')->get();
+        return view('projects.view')->with('project', $project)->with('users', $users);
     }
 
     /**
@@ -129,26 +130,25 @@ class ProjectsController extends Controller
     {   
         $project = Project::find($id);
         $students = User::all()->where('role', '=', 'S');
-        return view('students.students', compact('project', 'students'));
+        return view('students.addstudent', compact('project', 'students'));
     }
 
     public function addStudent(Project $project, User $student){
-
-        //check of de student al gekoppeld is aan het project. 
-        //als deze al gekoppeld is hoef ik deze niet nog een keer toe te voegen
-        //is deze student nog niet toegevoegd wil ik deze wel koppelen.
 
         if(!$project->users->contains($student->id)){
             $project->users()->attach($student->id);
         } else {
             return Redirect::back()->withErrors('De student ' . $student->name . ' is al gekoppeld aan het project ' . $project->title);
         }
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Student: ' . $student->name . 'succesvol toegevoegd aan: ' . $project->title);
     }
 
-    public function studentProjectDelete($id)
+    public function studentProjectDelete(Project $project, User $student)
     {
-        $student = User::find($id);
-        $student->projects()->detach($project_id);
+        if($project->users->contains($student->id)){
+            $project->users()->detach($student->id);
+        } else {
+            return Redirect::back()->withErrors('De student ' . $student->name . ' zit nog niet in het project: ' . $project->title);        }
+        return redirect()->back()->with('success', 'Student: ' . $student->name . 'succesvol verwijderd uit: ' . $project->title);;
     }
 }

@@ -22,3 +22,11 @@
     {{session('error')}}
   </div>
 @endif
+
+@if (session('message'))
+  <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+      <strong>Succes!</strong>
+    {{session('success')}}
+  </div>
+@endif
