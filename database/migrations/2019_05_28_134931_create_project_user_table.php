@@ -24,7 +24,7 @@ class CreateProjectUserTable extends Migration
 
             $table->timestamp('start_date' )->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end_date' )->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->boolean('active')->default('false');
+            $table->boolean('active')->default(false);
 
             $table->timestamps();
 
