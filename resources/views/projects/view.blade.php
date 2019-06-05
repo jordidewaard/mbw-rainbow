@@ -20,7 +20,7 @@
             <h3>Studenten in dit project</h3>
             <ul>
                 @foreach ($project->users as $user)
-                    @if($user->name > 0)
+                    @if($user->name == true)
                         <li>{{ $user->name }}</li>
                         @else
                             <?php echo"Er zijn nog geen studenten aan dit project gekoppeld"?>
