@@ -17,7 +17,7 @@
     </div>
         <br>
         <div>
-            <h3>Studenten in dit project</h3>
+            <h3>Studenten in dit project: {{count($project->users)}}</h3>
             <ul>
                 @foreach ($project->users as $user)
                     @if($user->name == true)
