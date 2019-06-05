@@ -13,8 +13,17 @@
         <div>
         <h5>studentnummer</h5>
     </div>
-    <div>
-    </div>
+    <br>
+        <div>
+            <h3>Projecten waar deze student aan is toegevoegd: {{count($student->projects)}}</h3>
+            <ul>
+                @if(!count($student->projects))
+                   <li>Student is nog niet toegevoegd aan project</li>
+                @endif
+                @foreach ($student->projects as $project)
+                    <li>{{ $project->title }}</li>
+                @endforeach
+            </ul>
     <hr>
         <small>Geschreven op {{$student->created_at}}</small>
     <hr>
