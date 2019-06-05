@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use App\Project;
 use App\User;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentsController extends Controller
 {
@@ -50,7 +52,8 @@ class StudentsController extends Controller
     public function show($id)
     {
         $student = User::find($id);
-        return view('students.view')->with('student', $student);
+        $projects = Project::with('users')->get();
+        return view('students.view')->with('student', $student)->with('projects', $projects);
     }
 
     /**

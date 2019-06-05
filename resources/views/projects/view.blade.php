@@ -19,12 +19,11 @@
         <div>
             <h3>Studenten in dit project: {{count($project->users)}}</h3>
             <ul>
+                @if(!count($project->users))
+                   <li>Er zijn nog geen studenten aan dit project gekoppeld</li>
+                @endif
                 @foreach ($project->users as $user)
-                    @if($user->name == true)
-                        <li>{{ $user->name }}</li>
-                        @else
-                            <li>Er zijn nog geen studenten aan dit project gekoppeld</li>
-                    @endif
+                    <li>{{ $user->name }}</li>
                 @endforeach
             </ul>
         </div>    
