@@ -23,7 +23,7 @@
                     @if($user->name == true)
                         <li>{{ $user->name }}</li>
                         @else
-                            <?php echo"Er zijn nog geen studenten aan dit project gekoppeld"?>
+                            <li>Er zijn nog geen studenten aan dit project gekoppeld</li>
                     @endif
                 @endforeach
             </ul>
