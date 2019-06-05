@@ -15,21 +15,24 @@
                 <div class="card-body">
                         @if(count($students) > 0)
 
-                        <table class="table table-borderd table-hover">
-                            <thead class="table-primary">
+                        <table class="table table-striped">
                                 <tr class="active">
                                     <th><h4>Naam</h4></th>
                                     <th><h4>Studentnummer</h4></th>
+                                    <th class="text-right"><h4>Aantal Projecten</h4></th>
                                 </tr>
-                            </thead>
 
                             @foreach ($students as $student)
-                            <tbody>
                                 <tr>
                                     <td><a href="/students/view/{{$student->id}}">{{$student->name}}</a></td>
                                     <td>studentnummer</td>
+                                    <td><a href="/projects/view"></a>
+                                        <div class="row row-fix">
+                                            <a href="#" class="badge badge-primary">Numbers</a>
+                                        </div>
+                                    </td>
+
                                 </tr> 
-                            </tbody>
                             @endforeach
                         </table> 
                         @else
@@ -42,3 +45,4 @@
     </div>
 </div>
 @endsection
+
