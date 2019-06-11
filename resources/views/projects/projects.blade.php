@@ -19,14 +19,14 @@
                         <table class="table table-striped">
                                 <tr>
                                     <th><h4>Titel</h4></th>
-                                    <th><h4>Datum</h4></th>
+                                    <th class="text-center"><h4>Datum</h4></th>
                                     <th class="text-right"><h4>Actie</h4></th>
                                 </tr>
 
                             @foreach ($projects as $project)
                                 <tr>
                                     <td><a href="/projects/view/{{$project->id}}">{{$project->title}}</a></td>
-                                    <td>{{$project->created_at}}</td>
+                                    <td class="text-center">{{$project->created_at}}</td>
                                     <td>
                                         <div class="row row-fix">
                                             <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>

@@ -18,17 +18,17 @@
                         <table class="table table-striped">
                                 <tr class="active">
                                     <th><h4>Naam</h4></th>
-                                    <th><h4>Studentnummer</h4></th>
-                                    <th class="text-right"><h4>Aantal Projecten</h4></th>
+                                    <th class="text-center"><h4>Studentnummer</h4></th>
+                                    <th class="text-right"><h4>Projecten</h4></th>
                                 </tr>
 
                             @foreach ($students as $student)
                                 <tr>
                                     <td><a href="/students/view/{{$student->id}}">{{$student->name}}</a></td>
-                                    <td>studentnummer</td>
+                                    <td class="text-center">studentnummer</td>
                                     <td><a href="/projects/view"></a>
                                         <div class="row row-fix">
-                                            <a href="#" class="badge badge-primary">Numbers</a>
+                                            <span class="badge badge-primary">{{count($student->projects)}}</span> 
                                         </div>
                                     </td>
 

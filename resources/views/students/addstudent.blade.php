@@ -18,9 +18,10 @@
                         <table class="table table-borderd table-hover">
                             <thead class="table-primary">
                                 <tr class="active">
-                                    <th><h4>Actie</h4></th>
                                     <th><h4>Naam</h4></th>
                                     <th><h4>Studentnummer</h4></th>
+                                    <th><h4>Actie</h4></th>
+
                                 </tr>
                             </thead>
 
