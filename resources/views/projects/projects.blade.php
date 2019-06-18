@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="container">
-    <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
+    <a href="/home" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
     <br><br>
-    
+
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -38,12 +38,12 @@
                                             {!!Form::close()!!}
                                         </div>
                                     </td>
-                                </tr> 
+                                </tr>
                             @endforeach
-                        </table> 
+                        </table>
                         @else
-                        <p>Er zijn nog geen projecten</p> 
-                    @endif 
+                        <p>Er zijn nog geen projecten</p>
+                    @endif
                 </div>
             </div>
             <br>

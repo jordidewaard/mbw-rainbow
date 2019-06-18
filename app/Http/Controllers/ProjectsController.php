@@ -57,7 +57,7 @@ class ProjectsController extends Controller
         $project->save();
         $user = User::find('id');
         $project->users()->attach($user);
-    
+
 
 
         return redirect('/projects')->with('success', 'je project is al gemaakt');
@@ -106,8 +106,8 @@ class ProjectsController extends Controller
         $project = Project::find($id);
         $project->title = $request->input('title');
         $project->description = $request->input('description');
-        $project->save(); 
-        
+        $project->save();
+
         return redirect('/projects')->with('success', 'Project is bijgewerkt');
     }
 
@@ -120,27 +120,28 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         $project = Project::find($id);
-        
+
         $project->delete();
-        
+
         return redirect('/projects')->with('success', 'Project is verwijderd');
     }
 
     public function addStudentsToProject($id)
-    {   
+    {
         $project = Project::find($id);
         $students = User::all()->where('role', '=', 'S');
         return view('students.addstudent', compact('project', 'students'));
     }
 
-    public function addStudent(Project $project, User $student){
+    public function addStudent(Project $project, User $student)
+    {
 
         if(!$project->users->contains($student->id)){
             $project->users()->attach($student->id);
         } else {
-            return Redirect::back()->withErrors('De student ' . $student->name . ' is al gekoppeld aan het project ' . $project->title);
+            return Redirect::back()->withErrors('De student ' . $student->name . ' is al gekoppeld aan het ' . $project->title);
         }
-        return redirect()->back()->with('success', 'Student: ' . $student->name . 'succesvol toegevoegd aan: ' . $project->title);
+        return redirect()->back()->with('success', 'Student: ' . $student->name . ' succesvol toegevoegd aan: ' . $project->title);
     }
 
     public function studentProjectDelete(Project $project, User $student)
@@ -149,6 +150,6 @@ class ProjectsController extends Controller
             $project->users()->detach($student->id);
         } else {
             return Redirect::back()->withErrors('De student ' . $student->name . ' zit nog niet in het project: ' . $project->title);        }
-        return redirect()->back()->with('success', 'Student: ' . $student->name . 'succesvol verwijderd uit: ' . $project->title);;
+        return redirect()->back()->with('error', 'Student: ' . $student->name . ' succesvol verwijderd uit: ' . $project->title);;
     }
 }

@@ -1,12 +1,12 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
-    <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
+    <a href="/home" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
     <br><br>
-    
+
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
@@ -28,16 +28,16 @@
                                     <td class="text-center">studentnummer</td>
                                     <td><a href="/projects/view"></a>
                                         <div class="row row-fix">
-                                            <span class="badge badge-primary">{{count($student->projects)}}</span> 
+                                            <span class="badge badge-primary">{{count($student->projects)}}</span>
                                         </div>
                                     </td>
 
-                                </tr> 
+                                </tr>
                             @endforeach
-                        </table> 
+                        </table>
                         @else
-                        <p>Er zijn geen studenten</p> 
-                    @endif 
+                        <p>Er zijn geen studenten</p>
+                    @endif
                 </div>
             </div>
             <br>
@@ -45,4 +45,3 @@
     </div>
 </div>
 @endsection
-

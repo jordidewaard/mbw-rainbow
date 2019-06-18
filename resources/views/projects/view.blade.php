@@ -1,19 +1,23 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
 
-<a href="/projects" class="btn btn-outline-secondary">Terug</a>
-<a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix">Student Toevoegen/Verwijderen</a>
+<a href="/projects" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
-        <br><br>
+<br><br>
 
-        <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                <div class="card-header"><h5>{{$project->title}}</h5></div>
-                <div class="card-body text-secondary">
-                  <h5 class="card-title">Studenten: <span class="badge badge-primary">{{count($project->users)}}</span>
-                  </h5>
+   <div class="card border-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header"><h5>{{$project->title}}</h5></div>
+         <div class="card-body text-secondary">
+            <div class="btn-group" role="group" aria-label="First group">
+               <h5 class="card-title">Studenten: <span class="badge badge-primary">{{count($project->users)}}</span></h5>
+            </div>
+            <div class="btn-group row-fix" role="group" aria-label="Second group">
+                     <a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix"><i class="fa fa-user-plus" aria-hidden="true"></i><i class="fas fa-user-minus"></i></a>
+                   </div>
+
                   <p>{{$project->description}}</p>
                        <ul class="list-group list-group">
                             @if(!count($project->users))
@@ -27,20 +31,20 @@
                   <hr>
                   <small>Geschreven op {{$project->created_at}}</small>
                   <hr>
-    
-                  <div>
-                        <div class="btn-group" role="group" aria-label="First group">
-                          <a class="btn btn-outline-success" href="/projects/{{$project->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
-                        </div>
-            
-                        <div class="btn-group" role="group" aria-label="Second group">
+
+            <div>
+               <div class="btn-group" role="group" aria-label="First group">
+                  <a class="btn btn-outline-success" href="/projects/{{$project->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
+               </div>
+
+               <div class="btn-group" role="group" aria-label="Second group">
                             {!!Form::open(['action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
                             @csrf
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
                             {!!Form::close()!!}
-                        </div>
-                  </div>
-        </div>
+               </div>
+            </div>
+         </div>
 </div>
 @endsection

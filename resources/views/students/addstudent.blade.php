@@ -1,44 +1,44 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
-    <a href="/projects/view/{{$project->id}}" class="btn btn-outline-secondary">Terug naar {{$project->title}}</a>
+    <a href="/projects/view/{{$project->id}}" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
     <br><br>
-    
+
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Project: {{$project->title}}</div>
+                <div class="card-header">{{$project->title}}</div>
 
                 <div class="card-body">
                         @if(count($students) > 0)
 
-                        <table class="table table-borderd table-hover">
-                            <thead class="table-primary">
+                        <table class="table table-striped">
                                 <tr class="active">
                                     <th><h4>Naam</h4></th>
-                                    <th><h4>Studentnummer</h4></th>
-                                    <th><h4>Actie</h4></th>
-
+                                    <th class="text-center"><h4>Studentnummer</h4></th>
+                                    <th class="text-right"><h4>Actie</h4></th>
                                 </tr>
-                            </thead>
 
                             @foreach ($students as $student)
-                            <tbody>
                                 <tr>
-                                    <td><a class="btn btn-outline-success" href="/project/{{$project->id}}/addstudent/{{$student->id}}">Toevoegen aan: {{$project->title}}</a>
-                                        <a class="btn btn-outline-danger" href="/project/{{$project->id}}/deletestudent/{{$student->id}}">Verwijder uit: {{$project->title}}</a></td>
                                     <td><a href="/students/view/{{$student->id}}">{{$student->name}}</a></td>
-                                    <td>studentnummer</td>
-                                </tr> 
-                            </tbody>
+                                    <td class="text-center">studentnummer</td>
+                                    <td><a href="/projects/view"></a>
+                                        <div class="row row-fix">
+                                                <a class="btn btn-outline-success a-fix-table" href="/project/{{$project->id}}/addstudent/{{$student->id}}"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                                                <a class="btn btn-outline-danger" href="/project/{{$project->id}}/deletestudent/{{$student->id}}"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                                        </div>
+                                    </td>
+
+                                </tr>
                             @endforeach
-                        </table> 
+                        </table>
                         @else
-                        <p>Er zijn geen studenten</p> 
-                    @endif 
+                        <p>Er zijn geen studenten</p>
+                    @endif
                 </div>
             </div>
             <br>

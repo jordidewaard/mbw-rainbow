@@ -1,23 +1,26 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
-    <h2>Project Bewerken</h2><br>
-    {!! Form::open(['action' => ['ProjectsController@update', $project->id], 'method' => 'POST']) !!} 
+    <a href="/projects" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+
+    <h2 class="text-center">Project Bewerken</h2><br>
+
+    {!! Form::open(['action' => ['ProjectsController@update', $project->id], 'method' => 'POST']) !!}
     @csrf
 
     <div class="form-group">
          {{Form::label('title', 'Titel')}}
          {{Form::text('title', $project->title, ['class' => 'form-control', 'placeholder' => 'Titel...', 'required' => 'autofocus'])}}
         </div>
-        <div class="form-group"> 
+        <div class="form-group">
           {{Form::label('description', 'Omschrijving')}}
           {!!Form::textarea('description', $project->description, ['id' => '', 'class' => 'form-control', 'placeholder' => 'Omschrijving...', 'required' => 'autofocus'])!!}
         </div>
-        
+
           {{Form::hidden('_method', 'PUT')}}
           {{Form::submit('Project Bewerken', ['class' =>'btn btn-outline-primary'])}}
-    {!! Form::close() !!} 
+    {!! Form::close() !!}
   </div>
 @endsection

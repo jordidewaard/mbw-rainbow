@@ -1,10 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
 
-    <a href="/students" class="btn btn-outline-secondary">Terug</a>
+    <a href="/students" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
     <br><br>
 
@@ -30,7 +30,7 @@
                     <div class="btn-group" role="group" aria-label="First group">
                         <a class="btn btn-outline-success" href="/students/{{$student->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
                     </div>
-            
+
                     <div class="btn-group" role="group" aria-label="Second group">
                         {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
                         @csrf
@@ -43,4 +43,3 @@
     </div>
 </div>
 @endsection
-
