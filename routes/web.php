@@ -35,9 +35,6 @@ Route::resource('/users', 'UsersController');
 Route::resource('/students', 'StudentsController');
 Route::get('/students/view/{id}', 'StudentsController@show');
 
-Route::get('/teachers', 'UsersController@teacher');
-Route::get('/clients', 'UsersController@client');
+//Route::get('/teachers', 'UsersController@teacher');
 
-
-
-
+Route::resource('/clients', 'ClientsController');
