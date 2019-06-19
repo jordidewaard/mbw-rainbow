@@ -16,7 +16,9 @@
             </div>
             <div class="btn-group row-fix" role="group" aria-label="Second group">
                      <a href="/project/{{$project->id}}/addstudents" class="btn btn-outline-primary row-fix"><i class="fa fa-user-plus" aria-hidden="true"></i><i class="fas fa-user-minus"></i></a>
-                   </div>
+            </div>
+
+            <br><br>
 
                   <p>{{$project->description}}</p>
                        <ul class="list-group list-group">
