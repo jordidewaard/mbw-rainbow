@@ -31,7 +31,7 @@
                         <a class="btn btn-outline-success" href="/students/{{$student->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
                     </div>
             
-                    <div class="btn-group" role="group" aria-label="Second group">
+                    <div class="btn-group" role="group" aria-label="Second group" onclick="return confirm('Weet u het zeker?')">
                         {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
                         @csrf
                         {{Form::hidden('_method', 'DELETE')}}
