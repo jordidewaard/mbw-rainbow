@@ -72,8 +72,7 @@ class ProjectsController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        $users = User::with('projects')->get();
-        return view('projects.view')->with('project', $project)->with('users', $users);
+        return view('projects.view')->with('project', $project);
     }
 
     /**
@@ -129,8 +128,16 @@ class ProjectsController extends Controller
     public function addStudentsToProject($id)
     {
         $project = Project::find($id);
-        $students = User::all()->where('role', '=', 'S');
-        return view('students.addstudent', compact('project', 'students'));
+        //$teachers = User::all()->where('role', '=', 'S');
+        $students = User::where('role', '=', 'S')->whereDoesntHave('projects', function($q) use($id) {
+            $q->where('id', $id);
+        })->get();
+
+        $students_joined = User::where('role', '=', 'S')->whereHas('projects', function($q) use($id) {
+            $q->where('id', $id);
+        })->get();
+
+        return view('students.addstudent', compact('project', 'students', 'students_joined'));
     }
 
     public function addStudent(Project $project, User $student)
@@ -151,5 +158,39 @@ class ProjectsController extends Controller
         } else {
             return Redirect::back()->withErrors('De student ' . $student->name . ' zit nog niet in het project: ' . $project->title);        }
         return redirect()->back()->with('error', 'Student: ' . $student->name . ' succesvol verwijderd uit: ' . $project->title);;
+    }
+
+    public function addTeachersToProject($id)
+    {
+        $project = Project::find($id);
+        $teachers = User::where('role', '=', 'C')->whereDoesntHave('projects', function($q) use($id) {
+            $q->where('id', $id);
+        })->get();
+
+        $teachers_joined = User::where('role', '=', 'C')->whereHas('projects', function($q) use($id) {
+            $q->where('id', $id);
+        })->get();
+
+        return view('teachers.addteacher', compact('project', 'teachers', 'teachers_joined'));
+    }
+
+    public function addTeacher(Project $project, User $teacher)
+    {
+
+        if(!$project->users->contains($teacher->id)){
+            $project->users()->attach($teacher->id);
+        } else {
+            return Redirect::back()->withErrors('De leraar ' . $teacher->name . ' is al gekoppeld aan het ' . $project->title);
+        }
+        return redirect()->back()->with('success', 'Leraar: ' . $teacher->name . ' succesvol toegevoegd aan: ' . $project->title);
+    }
+
+    public function teacherProjectDelete(Project $project, User $teacher)
+    {
+        if($project->users->contains($teacher->id)){
+            $project->users()->detach($teacher->id);
+        } else {
+            return Redirect::back()->withErrors('De leraar ' . $teacher->name . ' zit nog niet in het project: ' . $project->title);        }
+        return redirect()->back()->with('error', 'Leraar: ' . $teacher->name . ' succesvol verwijderd uit: ' . $project->title);;
     }
 }

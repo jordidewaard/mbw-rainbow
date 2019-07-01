@@ -4,11 +4,61 @@
 
 <div class="container">
 
-<a href="/projects" class="btn btn-outline-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+  <div class="d-flex">
+    <a href="/projects" class="btn btn-outline-secondary" style="height: 37px;"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+    <div class="ml-3">
+      <h4 class="mb-0">{{$project->title}}</h4>
+      <small>Geschreven op {{$project->created_at->format('d/m/Y')}}</small>
+    </div>
+  </div>
 
-<br><br>
+  <br>
 
-   <div class="card border-secondary mb-3" style="max-width: 18rem;">
+  <p>{{$project->description}}</p>
+
+  <div class="row">
+    @foreach ($project->users as $user)
+      <div class="col-md-6 col-lg-4">
+        <div class="card border-secondary mb-3" style="height: 77px;">
+          <div class="card-body text-secondary">
+            <div class="d-flex">
+              <span class="my-auto">{{ $user->name }}</span>
+              <a href="/project/{{$project->id}}/deletestudent/{{$user->id}}" class="btn btn-outline-danger ml-auto" style="height: 37px;"><i class="fa fa-times" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
+    <div class=" col-md-6 col-lg-4">
+      <div class="card border-secondary mb-3" style="height: 77px;">
+        <div class="card-body text-secondary d-flex">
+          <a href="/project/{{$project->id}}/addstudents" class="my-auto">
+            <i class="fa fa-user-plus" ></i>
+            <span class="ml-2">Voeg Student Toe</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class=" col-md-6 col-lg-4">
+      <div class="card border-secondary mb-3" style="height: 77px;">
+        <div class="card-body text-secondary d-flex">
+          <a href="/project/{{$project->id}}/addteachers" class="my-auto">
+            <i class="fa fa-user-plus" ></i>
+            <span class="ml-2">Voeg Leraar Toe</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+{{-- @foreach ($project->users as $user)
+<div class="card border-secondary mb-3" style="max-width: 18rem;">
       <div class="card-header"><h5>{{$project->title}}</h5></div>
          <div class="card-body text-secondary">
             <div class="btn-group" role="group" aria-label="First group">
@@ -49,4 +99,5 @@
             </div>
          </div>
 </div>
+@endforeach --}}
 @endsection
