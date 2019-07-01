@@ -148,7 +148,7 @@ class ProjectsController extends Controller
         } else {
             return Redirect::back()->withErrors('De student ' . $student->name . ' is al gekoppeld aan het ' . $project->title);
         }
-        return redirect()->back()->with('success', 'Student: ' . $student->name . ' succesvol toegevoegd aan: ' . $project->title);
+        return redirect()->back()->with('success', 'Student: ' . $student->name . ' succesvol toegevoegd aan ' . $project->title);
     }
 
     public function studentProjectDelete(Project $project, User $student)
@@ -156,8 +156,8 @@ class ProjectsController extends Controller
         if($project->users->contains($student->id)){
             $project->users()->detach($student->id);
         } else {
-            return Redirect::back()->withErrors('De student ' . $student->name . ' zit nog niet in het project: ' . $project->title);        }
-        return redirect()->back()->with('error', 'Student: ' . $student->name . ' succesvol verwijderd uit: ' . $project->title);;
+            return Redirect::back()->withErrors('De student ' . $student->name . ' zit nog niet in het project ' . $project->title);        }
+        return redirect()->back()->with('error', 'Student ' . $student->name . ' succesvol verwijderd uit ' . $project->title);;
     }
 
     public function addTeachersToProject($id)
@@ -182,7 +182,7 @@ class ProjectsController extends Controller
         } else {
             return Redirect::back()->withErrors('De leraar ' . $teacher->name . ' is al gekoppeld aan het ' . $project->title);
         }
-        return redirect()->back()->with('success', 'Leraar: ' . $teacher->name . ' succesvol toegevoegd aan: ' . $project->title);
+        return redirect()->back()->with('success', 'Leraar ' . $teacher->name . ' succesvol toegevoegd aan ' . $project->title);
     }
 
     public function teacherProjectDelete(Project $project, User $teacher)
@@ -190,7 +190,7 @@ class ProjectsController extends Controller
         if($project->users->contains($teacher->id)){
             $project->users()->detach($teacher->id);
         } else {
-            return Redirect::back()->withErrors('De leraar ' . $teacher->name . ' zit nog niet in het project: ' . $project->title);        }
-        return redirect()->back()->with('error', 'Leraar: ' . $teacher->name . ' succesvol verwijderd uit: ' . $project->title);;
+            return Redirect::back()->withErrors('De leraar ' . $teacher->name . ' zit nog niet in het project ' . $project->title);        }
+        return redirect()->back()->with('error', 'Leraar ' . $teacher->name . ' succesvol verwijderd uit ' . $project->title);;
     }
 }
