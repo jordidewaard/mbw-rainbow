@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Selecteer studenten om toe te voegen</div>
+                <div class="card-header">Selecteer leraren om toe te voegen</div>
 
                 <div class="card-body">
                         @if(count($teachers) > 0)
