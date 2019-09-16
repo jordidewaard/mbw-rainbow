@@ -37,20 +37,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    const Admin_role = 'a';
-    const Client_role = 'c';
-    const Student_role = 's';
+    const ADMIN_TYPE = 'A';
+    const CLIENT_TYPE = 'C';
+    const STUDENT_TYPE = 'S';
 
     public function isAdmin(){
-        return $this->role === self::Admin_role;
+        return $this->role === self::ADMIN_TYPE;
     }
 
     public function isClient(){
-        return $this->role === self::Client_role;
+        return $this->role === self::CLIENT_TYPE;
     }
 
     public function isStudent(){
-        return $this->role === self::Student_role;
+        return $this->role === self::STUDENT_TYPE;
     }
 
     public function projects(){
