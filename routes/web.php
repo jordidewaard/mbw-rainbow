@@ -12,31 +12,33 @@
 */
 Auth::routes(['verify' => true]);
 
-
 Route::get('/', function () {
-    return view('pages.welcome');
+   	return redirect('home');
 });
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/projects', 'ProjectsController');
-Route::get('/projects/view/{id}', 'ProjectsController@show');
+Route::group(['middleware' => ['auth']], function() {
+    
 
-Route::get('/studentAdding/{id}', 'ProjectsController@studentProjectAdding');
-Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
-Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
-Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
+	Route::resource('/projects', 'ProjectsController');
+	Route::get('/projects/view/{id}', 'ProjectsController@show');
 
-Route::resource('/groups', 'GroupsController');
-Route::get('/groups/view/{id}', 'GroupsController@show');
+	Route::get('/studentAdding/{id}', 'ProjectsController@studentProjectAdding');
+	Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
+	Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
+	Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
 
-Route::resource('/users', 'UsersController');
+	Route::resource('/groups', 'GroupsController');
+	Route::get('/groups/view/{id}', 'GroupsController@show');
 
-Route::resource('/students', 'StudentsController');
-Route::get('/students/view/{id}', 'StudentsController@show');
+	Route::resource('/users', 'UsersController');
 
-Route::get('/teachers', 'UsersController@teacher');
-Route::get('/clients', 'UsersController@client');
+	Route::resource('/students', 'StudentsController');
+	Route::get('/students/view/{id}', 'StudentsController@show');
+
+	Route::get('/teachers', 'UsersController@teacher');
+	Route::get('/clients', 'UsersController@client');
+});
 
 
 
