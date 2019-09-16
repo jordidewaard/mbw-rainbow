@@ -17,12 +17,7 @@ class UsersController extends Controller
         return view('users.users')->with('users', $users);
 
     }
-
-    public function teacher()
-    {
-        return view('teachers.teachers');
-    }
-
+    
     public function student()
     {
         return view('students.students');
