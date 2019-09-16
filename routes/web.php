@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('/teachers', 'UsersController@teacher');
 	Route::get('/clients', 'UsersController@client');
+	
+	Route::get('/studentOverview', 'HoursController@index');
+	
 });
 
 
