@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Hour;
+use App\Project;
+use App\ProjectUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HoursController extends Controller
 {
@@ -14,7 +18,34 @@ class HoursController extends Controller
      */
     public function index()
     {
-        //
+        
+        $projects = Project::all()->toArray();
+        return view('hours.studentOverview', compact('projects'));
+
+    }
+
+    public function addHoursToProject($project) {
+        $project = Project::find($project);
+        if ($project == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+        $user = Auth::user();
+        if ($user == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+        $projectId = $project->id;
+        $userId = $user->id;
+
+        $projectUser = DB::table('project_user')->where('project_id', $projectId)->where('user_id', $userId)->get();
+        if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+        
+        $projectUserId = $projectUser[0]->id;
+
+        //$projectUser = ProjectUser::where(['project_id'=>$projectId, 'user_id'=>$userId]);
+        // TODO: fix this, because this should work and is somewhat simpeler
+
+        dd($projectUserId);
+
     }
 
     /**
