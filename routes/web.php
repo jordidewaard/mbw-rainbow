@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
 	Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
 	Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
+	Route::get('/project/{project}/addhours', 'HoursController@addHoursToProject');
 
 	Route::resource('/groups', 'GroupsController');
 	Route::get('/groups/view/{id}', 'GroupsController@show');
@@ -38,8 +39,15 @@ Route::group(['middleware' => ['auth']], function() {
     {
         Route::get('/teachers', 'AdminController@admin');
 
+<<<<<<< HEAD
         Route::resource('/students', 'StudentsController');
         Route::get('/students/view/{id}', 'StudentsController@show');
+=======
+	Route::get('/clients', 'UsersController@client');
+	
+	Route::get('/studentOverview', 'HoursController@index');
+	
+>>>>>>> 87e1ba55eff24f6aedca0c7cca291ca46f153dcb
 
         Route::get('/clients', 'UsersController@client');
     });
