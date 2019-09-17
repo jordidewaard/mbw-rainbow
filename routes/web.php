@@ -15,6 +15,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', function () {
    	return redirect('home');
 });
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
@@ -33,15 +34,18 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('/users', 'UsersController');
 
-	Route::resource('/students', 'StudentsController');
-	Route::get('/students/view/{id}', 'StudentsController@show');
+    Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
+    {
+        Route::get('/teachers', 'AdminController@admin');
 
-	Route::get('/clients', 'UsersController@client');
+        Route::resource('/students', 'StudentsController');
+        Route::get('/students/view/{id}', 'StudentsController@show');
 
-	Route::get('/teachers', 'AdminController@admin')    
-    ->middleware('is_admin')    
-    ->name('admin');
+        Route::get('/clients', 'UsersController@client');
+    });
 });
+
+
 
 
 
