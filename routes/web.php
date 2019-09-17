@@ -35,21 +35,15 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('/users', 'UsersController');
 
+    Route::get('/studentOverview', 'HoursController@index');
+
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
         Route::get('/teachers', 'AdminController@admin');
 
-<<<<<<< HEAD
         Route::resource('/students', 'StudentsController');
         Route::get('/students/view/{id}', 'StudentsController@show');
-=======
-	Route::get('/clients', 'UsersController@client');
-	
-	Route::get('/studentOverview', 'HoursController@index');
-	
->>>>>>> 87e1ba55eff24f6aedca0c7cca291ca46f153dcb
-
-        Route::get('/clients', 'UsersController@client');
+	    Route::get('/clients', 'UsersController@client');
     });
 });
 
