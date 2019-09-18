@@ -14,4 +14,5 @@ class AdminController extends Controller
     {
 		return view('teachers.teachers');
     }
+
 }

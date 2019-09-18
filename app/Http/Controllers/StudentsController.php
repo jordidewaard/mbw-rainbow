@@ -16,6 +16,7 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $students = User::where('role', 'S')->paginate(10);
