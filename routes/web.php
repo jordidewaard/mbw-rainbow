@@ -27,7 +27,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
 	Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
 	Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
-	Route::get('/project/{project}/addhours', 'HoursController@addHoursToProject');
 
 	Route::resource('/groups', 'GroupsController');
 	Route::get('/groups/view/{id}', 'GroupsController@show');
@@ -38,8 +37,11 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('/students/view/{id}', 'StudentsController@show');
 
 	Route::get('/clients', 'UsersController@client');
-	
+
+	Route::resource('/hours', 'HoursController');
 	Route::get('/studentOverview', 'HoursController@index');
+	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
+	Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
 	
 
 	Route::get('/teachers', 'AdminController@admin')    

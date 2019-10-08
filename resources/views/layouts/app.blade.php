@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Onstage') }}</title>
 
     <!-- Scripts -->
+    <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+
+
 </head>
 <body>
     <div id="app">

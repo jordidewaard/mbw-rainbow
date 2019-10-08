@@ -7,6 +7,7 @@ use App\Project;
 use App\ProjectUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HoursController extends Controller
@@ -24,7 +25,67 @@ class HoursController extends Controller
 
     }
 
-    public function addHoursToProject($project) {
+    public function requestHoursToProject($user, $project) {
+            $hours = $_POST['hours'];
+
+            if ($project == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($user == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($hours == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given hour is invalid'
+
+            $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
+            if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+            
+            $projectUserId = $projectUser[0]->id;
+
+            //dd($projectUser);
+
+            $h = new Hour();
+            $h->project_user_id = $projectUserId;
+            $h->hours=$hours;
+            $h->date = Carbon::now();
+            $h->status='requested';
+            $h->description='Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
+            $h->save();
+
+            return redirect('students/view/' . $user)->with('success','Uren zijn aangevraagd.');
+    }
+
+        public function addHoursToProject($user, $project) {
+            $hours = $_POST['hours'];
+
+            if ($project == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($user == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($hours == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given hour is invalid'
+
+            $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
+            if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+            
+            $projectUserId = $projectUser[0]->id;
+
+            //dd($projectUser);
+
+            $h = new Hour();
+            $h->project_user_id = $projectUserId;
+            $h->hours=$hours;
+            $h->date = Carbon::now();
+            $h->status='added';
+            $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+            $h->save();
+
+            return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
+    }
+
+        public function acceptHoursRequest($project) {
         $project = Project::find($project);
         if ($project == null) abort(404);
         // TODO: redirect to error page with meaningful message 'given project does not exist'
@@ -47,7 +108,6 @@ class HoursController extends Controller
         dd($projectUserId);
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
