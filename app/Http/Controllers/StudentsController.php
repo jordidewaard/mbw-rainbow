@@ -53,8 +53,7 @@ class StudentsController extends Controller
     public function show($id)
     {
         $student = User::find($id);
-        $projects = Project::with('users')->get();
-        return view('students.view')->with('student', $student)->with('projects', $projects);
+        return view('students.view')->with('student', $student);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Hour;
 use App\Project;
 use App\ProjectUser;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\DB;
 
 class HoursController extends Controller
 {
+    public function apitest() {
+        return json_encode(['data1'=>'data1body', 'data2'=>'data2body']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -74,15 +80,23 @@ class HoursController extends Controller
 
             //dd($projectUser);
 
-            $h = new Hour();
-            $h->project_user_id = $projectUserId;
-            $h->hours=$hours;
-            $h->date = Carbon::now();
-            $h->status='added';
-            $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
-            $h->save();
+            if ($hours == 0) {
+                return redirect('students/view/' . $user)->with('error','Kan niet 0 uur toevoegen.');
+            } else {
+                $h = new Hour();
+                $h->project_user_id = $projectUserId;
+                $h->hours=$hours;
+                $h->date = Carbon::now();
+                $h->status='added';
+                if ($hours < 0) {
+                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+                } if ($hours > 0) {
+                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
+                }
+                $h->save();
 
-            return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
+                return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
+            }
     }
 
         public function acceptHoursRequest($project) {
@@ -135,9 +149,10 @@ class HoursController extends Controller
      * @param  \App\Hours  $hours
      * @return \Illuminate\Http\Response
      */
-    public function show(Hours $hours)
+    public function show($id, $projectId)
     {
-        //
+        $student = User::find($id);
+        return view('hours.view')->with('student', $student);
     }
 
     /**

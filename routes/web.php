@@ -12,6 +12,8 @@
 */
 Auth::routes(['verify' => true]);
 
+Route::get('/api', 'HoursController@apitest');
+
 Route::get('/', function () {
    	return redirect('home');
 });
@@ -38,7 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/clients', 'UsersController@client');
 
 	Route::resource('/hours', 'HoursController');
-	Route::get('/studentOverview', 'HoursController@index');
+	Route::get('/students/view/{id}/{projectId}/hours', 'HoursController@show');
 	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
 	Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
 
