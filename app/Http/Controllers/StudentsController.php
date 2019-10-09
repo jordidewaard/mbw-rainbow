@@ -19,7 +19,7 @@ class StudentsController extends Controller
 
     public function index()
     {
-        $students = User::where('role', 'S')->paginate(10);
+        $students = User::orderBy('name', 'asc')->where('role', 'S')->paginate(10);
         return view('students.students')->with('students', $students); 
     }
 
