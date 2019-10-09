@@ -15,6 +15,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', function () {
    	return redirect('home');
 });
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
@@ -33,21 +34,25 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('/users', 'UsersController');
 
-	Route::resource('/students', 'StudentsController');
-	Route::get('/students/view/{id}', 'StudentsController@show');
-
-	Route::get('/clients', 'UsersController@client');
+  Route::get('/studentOverview', 'HoursController@index');
+  Route::get('/clients', 'UsersController@client');
 
 	Route::resource('/hours', 'HoursController');
 	Route::get('/studentOverview', 'HoursController@index');
 	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
 	Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
-	
 
-	Route::get('/teachers', 'AdminController@admin')    
-    ->middleware('is_admin')    
-    ->name('admin');
+    Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
+    {
+        Route::get('/teachers', 'AdminController@showteachers');
+        Route::get('/teachers/view/{id}', 'AdminController@show');
+        Route::resource('/students', 'StudentsController');
+        Route::get('/students/view/{id}', 'StudentsController@show');
+	    Route::get('/clients', 'UsersController@client');
+    });
 });
+
+
 
 
 

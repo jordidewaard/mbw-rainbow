@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -14,4 +15,10 @@ class AdminController extends Controller
     {
 		return view('teachers.teachers');
     }
+
+    public function showteachers() {
+        $teachers = User::where('role', 'A')->paginate(10);
+        return view('teachers.teachers')->with('teachers', $teachers);
+    }
+
 }
