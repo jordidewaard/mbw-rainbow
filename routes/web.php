@@ -39,7 +39,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
-        Route::get('/teachers', 'AdminController@admin');
+        Route::get('/teachers', 'AdminController@showteachers');
+        Route::get('/teachers/view/{id}', 'AdminController@show');
 
         Route::resource('/students', 'StudentsController');
         Route::get('/students/view/{id}', 'StudentsController@show');
