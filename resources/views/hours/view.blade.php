@@ -20,7 +20,7 @@
 
                         @foreach ($student->projects as $project)
                             <li class="list-group-item">
-                                <a href="{{ $student->id }}/{{ $project->id }}/hours">{{ $project->title }}{{ $project->pivot->id }}</a>
+                                {{ $project->title }}
                                 <br>
                                 <div class="hours">
                                     <div class="progress">

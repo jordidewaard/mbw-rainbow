@@ -35,6 +35,7 @@
                                 </tr> 
                             @endforeach
                         </table> 
+                        {{ $students->links() }}
                         @else
                         <p>Er zijn geen studenten</p> 
                     @endif 
