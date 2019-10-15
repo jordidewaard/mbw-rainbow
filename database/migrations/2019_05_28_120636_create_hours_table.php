@@ -26,11 +26,11 @@ class CreateHoursTable extends Migration
             $table->increments('hour_id');
             //$table->primary(['hour_id']);
                 
-            $table->integer('project_user_id')->unsigned();
-            //$table->foreign('project_user_id')->references('id')->on('project_user');   
+            $table->foreign('project_user_id')->references('id')->on('project_user');   
             
             $table->date('date');
             $table->integer('hours');
+            $table->string('status');
             $table->mediumText('Description');
 
             $table->timestamps();

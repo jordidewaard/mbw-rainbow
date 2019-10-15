@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Hour;
 use App\Project;
 use App\ProjectUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HoursController extends Controller
 {
+    public function apitest() {
+        return json_encode(['data1'=>'data1body', 'data2'=>'data2body']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,75 @@ class HoursController extends Controller
 
     }
 
-    public function addHoursToProject($project) {
+    public function requestHoursToProject($user, $project) {
+            $hours = $_POST['hours'];
+
+            if ($project == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($user == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($hours == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given hour is invalid'
+
+            $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
+            if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+            
+            $projectUserId = $projectUser[0]->id;
+
+            //dd($projectUser);
+
+            $h = new Hour();
+            $h->project_user_id = $projectUserId;
+            $h->hours=$hours;
+            $h->date = Carbon::now();
+            $h->status='requested';
+            $h->description='Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
+            $h->save();
+
+            return redirect('students/view/' . $user)->with('success','Uren zijn aangevraagd.');
+    }
+
+        public function addHoursToProject($user, $project) {
+            $hours = $_POST['hours'];
+
+            if ($project == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($user == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+            if ($hours == null) abort(404);
+            // TODO: redirect to error page with meaningful message 'given hour is invalid'
+
+            $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
+            if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+            
+            $projectUserId = $projectUser[0]->id;
+
+            //dd($projectUser);
+
+            if ($hours == 0) {
+                return redirect('students/view/' . $user)->with('error','Kan niet 0 uur toevoegen.');
+            } else {
+                $h = new Hour();
+                $h->project_user_id = $projectUserId;
+                $h->hours=$hours;
+                $h->date = Carbon::now();
+                $h->status='added';
+                if ($hours < 0) {
+                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+                } if ($hours > 0) {
+                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
+                }
+                $h->save();
+
+                return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
+            }
+    }
+
+        public function acceptHoursRequest($project) {
         $project = Project::find($project);
         if ($project == null) abort(404);
         // TODO: redirect to error page with meaningful message 'given project does not exist'
@@ -47,7 +122,6 @@ class HoursController extends Controller
         dd($projectUserId);
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -75,9 +149,10 @@ class HoursController extends Controller
      * @param  \App\Hours  $hours
      * @return \Illuminate\Http\Response
      */
-    public function show(Hours $hours)
+    public function show($id, $projectId)
     {
-        //
+        $student = User::find($id);
+        return view('hours.view')->with('student', $student);
     }
 
     /**
