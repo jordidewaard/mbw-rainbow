@@ -87,10 +87,11 @@ class HoursController extends Controller
                 $h->project_user_id = $projectUserId;
                 $h->hours=$hours;
                 $h->date = Carbon::now();
-                $h->status='added';
-                if ($hours < 0) {
+                if ($hours > 0) {
+                    $h->status='added';
                     $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
-                } if ($hours > 0) {
+                } else if ($hours < 0) {
+                    $h->status='removed';
                     $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
                 }
                 $h->save();
@@ -149,10 +150,12 @@ class HoursController extends Controller
      * @param  \App\Hours  $hours
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $projectId)
+    public function show($projectUserId)
     {
-        $student = User::find($id);
-        return view('hours.view')->with('student', $student);
+        $hours = Hour::get()->where('project_user_id', $projectUserId);
+        $project = ProjectUser::find($projectUserId)->ProjectName();
+        $user = ProjectUser::find($projectUserId)->UserName();
+        return view('hours.view')->with('hours', $hours)->with('project', $project)->with('user', $user);
     }
 
     /**

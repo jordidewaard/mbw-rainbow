@@ -96,6 +96,11 @@ nav{
 	display: flex;
 }
 
+.hour {
+	display: inline-flex;
+	padding: 0;
+}
+
 .form-popup {
   display: none;
   border: 3px solid #f1f1f1;
