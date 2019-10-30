@@ -40,6 +40,7 @@
                 </div>
                 <br>
             </div>
+            {{ $teachers->links() }}
         </div>
     </div>
 @endsection

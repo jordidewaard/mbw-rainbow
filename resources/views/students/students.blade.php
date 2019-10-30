@@ -34,8 +34,7 @@
 
                                 </tr> 
                             @endforeach
-                        </table> 
-                        {{ $students->links() }}
+                        </table>
                         @else
                         <p>Er zijn geen studenten</p> 
                     @endif 
@@ -43,6 +42,7 @@
             </div>
             <br>
         </div>
+        {{ $students->links() }}
     </div>
 </div>
 @endsection
