@@ -7,9 +7,13 @@
     {!! Form::open(['action' => 'ProjectsController@store', 'method' => 'POST']) !!} 
     @csrf
 
-    <div class="form-group">
+        <div class="form-group">
          {{Form::label('title', 'Titel')}}
          {{Form::text('title','', ['class' => 'form-control', 'placeholder' => 'Titel...', 'required' => 'autofocus'])}}
+        </div>
+        <div class="form-group">
+         {{Form::label('duration', 'Uren')}}
+         {{Form::text('duration','', ['class' => 'form-control', 'placeholder' => 'Uren...', 'required' => 'autofocus'])}}
         </div>
         <div class="form-group">
           {{Form::label('description', 'Omschrijving')}}
