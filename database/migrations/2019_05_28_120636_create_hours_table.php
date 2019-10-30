@@ -31,7 +31,7 @@ class CreateHoursTable extends Migration
             $table->date('date');
             $table->integer('hours');
             $table->string('status');
-            $table->mediumText('Description');
+            $table->mediumText('description');
 
             $table->timestamps();
         });

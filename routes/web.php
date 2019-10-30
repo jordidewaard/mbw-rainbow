@@ -40,16 +40,16 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('/clients', 'UsersController@client');
 
 	Route::resource('/hours', 'HoursController');
-	Route::get('/students/view/{id}/{projectId}/hours', 'HoursController@show');
 	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
-	Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
         Route::get('/teachers', 'AdminController@showteachers');
         Route::get('/teachers/view/{id}', 'AdminController@show');
         Route::resource('/students', 'StudentsController');
+		Route::get('/students/view/{projectUserId}/hours', 'HoursController@show');
         Route::get('/students/view/{id}', 'StudentsController@show');
+		Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
 	    Route::get('/clients', 'UsersController@client');
     });
 });
