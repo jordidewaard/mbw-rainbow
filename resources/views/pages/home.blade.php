@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-
     <div class="row justify-content-center hpBlocks">
         <div class="col-sm-3">
             <a href="/projects">

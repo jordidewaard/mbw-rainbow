@@ -54,6 +54,7 @@ class ProjectsController extends Controller
         $project = new Project;
         $project->title = $request->input('title');
         $project->description = $request->input('description');
+        $project->link = $request->input('link');
         $project->save();
         $user = User::find('id');
         $project->users()->attach($user);
@@ -106,6 +107,7 @@ class ProjectsController extends Controller
         $project = Project::find($id);
         $project->title = $request->input('title');
         $project->description = $request->input('description');
+        $project->link = $request->input('link');
         $project->save(); 
         
         return redirect('/projects')->with('success', 'Project is bijgewerkt');

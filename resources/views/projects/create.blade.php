@@ -19,6 +19,10 @@
           {{Form::label('description', 'Omschrijving')}}
           {!!Form::textarea('description','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Omschrijving...', 'required' => 'autofocus'])!!}
         </div>
+        <div class="form-group">
+            {{Form::label('link', 'Trello Bord')}}
+            {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}
+        </div>
           {{Form::submit('Creëren', ['class' =>'btn btn-outline-primary'])}}
     {!! Form::close() !!} 
   </div>
