@@ -18,19 +18,19 @@
                            <li class="list-group-item">Student is nog niet toegevoegd aan project</li>
                         @endif
 
-                        @foreach ($student->projects as $project)
+                        @foreach ($student->projectUsers as $projectUser)
                             <li class="list-group-item">
-                                <a href="{{ $project->pivot->id }}/hours">{{ $project->title }}</a>
+                                <a href="{{ $projectUser->id }}/hours">{{ $projectUser->ProjectName() }}</a>
                                 <br>
                                 <div class="hours">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                            <span class="sr-only">60% Complete</span>
+                                        <div class="progress-bar" role="progressbar" style="width: {{ $projectUser->totalHours() }}%; max-width: 100%;">
+                                            <span class="sr-only">{{ $projectUser->totalHours() }}% Complete</span>
                                         </div>
                                         <span class="progress-type">Uren</span>
-                                        <span class="progress-completed">60%</span>
+                                        <span class="progress-completed">{{ $projectUser->totalHours() }}%</span>
                                     </div>
-                                    {!! Form::open(['id' => 'form-container' . $project->id, 'action' => ['HoursController@addHoursToProject', $student->id, $project->id], 'method' => 'POST']) !!} 
+                                    {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@addHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
                                     @csrf
                                     <div class="hoursInputButton">
                                         {{Form::number('hours', null,['class' => 'hoursInput', 'placeholder' => 'Uren', 'required' => 'autofocus'])}}

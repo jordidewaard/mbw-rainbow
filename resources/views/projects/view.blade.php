@@ -10,7 +10,7 @@
         <br><br>
 
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                <div class="card-header"><h5>{{$project->title}}</h5></div>
+                <div class="card-header"><h5>{{$project->title}} - {{$project->duration}} uur</h5></div>
                 <div class="card-body text-secondary">
                   <h5 class="card-title">Studenten: <span class="badge badge-primary">{{count($project->users)}}</span>
                   </h5>

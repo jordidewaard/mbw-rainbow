@@ -41,6 +41,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('/hours', 'HoursController');
 	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
+	Route::post('/hours/delete/{id}', 'HoursController@destroy');
+	Route::get('/hours/edit/{id}', 'HoursController@edit');
+	Route::get('/hours/update/{id}', 'HoursController@update');
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
