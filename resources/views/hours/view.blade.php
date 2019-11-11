@@ -16,8 +16,8 @@
             @endif
 
             @foreach ($hours as $hour)
-                <li class="list-group-item">
-                    <div class="hour col-2">
+                <li class="list-group-item col-12">
+                    <div class="colHoursStatus hour col-1">
                         {{ $hour->status }}
                     </div>
                     <div class="hour col-1">
@@ -29,8 +29,14 @@
                     <div class="hour col-2">
                         {{ $hour->date }}
                     </div>
-                    <div class="hour col-1">
-                        <button class="btn btn-secondary">Edit</button>
+                    <div class="colHoursDiv hour col-2">
+                        <form method="GET" action="/hours/edit/{{ $hour->hour_id }}">
+                            <button class="colButtonHours btn btn-secondary col-6">Edit</button>
+                        </form>
+                        <form method="POST" action="/hours/delete/{{ $hour->hour_id }}">
+                            @csrf
+                            <button class="colButtonHours btn btn-danger col-6">Delete</button>
+                        </form>
                     </div>
                 </li>
             @endforeach

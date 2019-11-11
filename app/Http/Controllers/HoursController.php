@@ -164,9 +164,10 @@ class HoursController extends Controller
      * @param  \App\Hours  $hours
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hours $hours)
+    public function edit($id)
     {
-        //
+        $hour = Hour::find($id);
+        return view('students.edit')->with('hour', $hour);
     }
 
     /**
@@ -187,8 +188,9 @@ class HoursController extends Controller
      * @param  \App\Hours  $hours
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hours $hours)
+    public function destroy($id)
     {
-        //
+        Hour::where('hour_id', $id)->delete();
+        return back();
     }
 }
