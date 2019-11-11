@@ -29,7 +29,6 @@
                                                 <span class="badge badge-primary">{{count($teacher->projects)}}</span>
                                             </div>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </table>
@@ -38,6 +37,7 @@
                         @endif
                     </div>
                 </div>
+                <br>
                 <br>
             </div>
             {{ $teachers->links() }}
