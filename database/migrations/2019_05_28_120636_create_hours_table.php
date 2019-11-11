@@ -15,19 +15,9 @@ class CreateHoursTable extends Migration
     {
         Schema::create('hours', function (Blueprint $table) {
 
-            //$table->integer('project_id')->unsigned();
-            //$table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-
-            //$table->integer('user_id')->unsigned();
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            //$table->primary(['project_id', 'user_id']);
-
             $table->increments('hour_id');
-            //$table->primary(['hour_id']);
-                
+            $table->integer('project_user_id')->unsigned();
             $table->foreign('project_user_id')->references('id')->on('project_user');   
-            
             $table->date('date');
             $table->integer('hours');
             $table->string('status');

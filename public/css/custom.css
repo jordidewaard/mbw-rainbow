@@ -127,3 +127,16 @@ nav{
 	width: 155px;
 	margin-left: 5px;
 }
+
+.colButtonHours{
+	margin-right: 15px;
+}
+
+.colHoursDiv {
+	float: right;
+	margin-right: 10px;
+}
+
+.colHoursStatus {
+	margin-right: 10px;
+}

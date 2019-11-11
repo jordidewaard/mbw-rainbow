@@ -42,6 +42,7 @@ class ProjectsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:75',
+            'duration' => 'required|max:2000',
             'description' => 'required|max:255'
         ]);
 
@@ -53,6 +54,7 @@ class ProjectsController extends Controller
 
         $project = new Project;
         $project->title = $request->input('title');
+        $project->duration = $request->input('duration');
         $project->description = $request->input('description');
         $project->save();
         $user = User::find('id');
@@ -99,12 +101,14 @@ class ProjectsController extends Controller
     {
 
         $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required'
+            'title' => 'required|max:75',
+            'duration' => 'required|max:2000',
+            'description' => 'required|max:255'
         ]);
 
         $project = Project::find($id);
         $project->title = $request->input('title');
+        $project->duration = $request->input('duration');
         $project->description = $request->input('description');
         $project->save(); 
         
