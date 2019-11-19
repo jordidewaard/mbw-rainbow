@@ -36,7 +36,7 @@
         </div>
         @endif
     </div>
-    
+    @if (Auth::user() && Auth::user()->role == 'A')
     <div class="row justify-content-center hpBlocks">
         <div class="col-sm-3">
             <a href="/teachers">
