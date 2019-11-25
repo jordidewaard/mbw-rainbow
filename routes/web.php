@@ -21,7 +21,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
-    
+
+    Route::resource('/form', 'FormController');
 
 	Route::resource('/projects', 'ProjectsController');
 	Route::get('/projects/view/{id}', 'ProjectsController@show');

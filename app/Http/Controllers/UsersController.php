@@ -23,6 +23,7 @@ class UsersController extends Controller
         return view('students.students');
     }
 
+
     public function client()
     {
         return view('clients.clients');
