@@ -34,11 +34,7 @@
 
                                 </tr> 
                             @endforeach
-<<<<<<< HEAD
                         </table>
-=======
-                        </table> 
->>>>>>> 380192ca4f3580c6a998e117b52eba1bb79a6aab
                         @else
                         <p>Er zijn geen studenten</p> 
                     @endif 
