@@ -166,8 +166,8 @@ class HoursController extends Controller
      */
     public function edit($id)
     {
-        $hour = Hour::find($id);
-        return view('students.edit')->with('hour', $hour);
+        $hour = Hour::get()->where('hour_id', $id)->first();
+        return view('hours.edit')->with('hour', $hour);
     }
 
     /**
@@ -179,7 +179,8 @@ class HoursController extends Controller
      */
     public function update(Request $request, Hours $hours)
     {
-        //
+        $data = $request->all();
+        return dd($data);
     }
 
     /**
