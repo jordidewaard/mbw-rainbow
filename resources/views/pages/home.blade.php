@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center hpBlocks">
-        @if (Auth::user() && Auth::user()->role == 'A')
+        @if (Auth::user() && (Auth::user()->role == 'S' | Auth::user()->role == 'A'))
         <div class="col-sm-3">
             <a href="/projects">
                 <div class="card bg-Green">
