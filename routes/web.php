@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/users', 'UsersController');
 
+<<<<<<< HEAD
     Route::get('/studentOverview', 'HoursController@index');
     Route::get('/clients', 'UsersController@client');
 
@@ -48,6 +49,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/hours/update/{id}', 'HoursController@update');
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function () {
+=======
+  	Route::get('/studentOverview', 'HoursController@index');
+  	Route::get('/clients', 'UsersController@client');
+
+	Route::resource('/hours', 'HoursController');
+	Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
+	Route::post('/hours/delete/{id}', 'HoursController@destroy');
+	Route::get('/hours/edit/{id}', 'HoursController@edit');
+	
+    Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
+    {
+>>>>>>> 776e69c833f44f365b50988f0e846a768825653b
         Route::get('/teachers', 'AdminController@showteachers');
         Route::get('/teachers/view/{id}', 'AdminController@show');
         Route::resource('/students', 'StudentsController');

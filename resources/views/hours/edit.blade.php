@@ -3,19 +3,23 @@
 @section('content')
 
 <div class="container">
-    <a href="/students/view/{{ $user->id }}" class="btn btn-outline-secondary">Terug</a>
+    <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Terug</a>
     <br><br>
-    <div class="card border-secondary mb-3" style="max-width: 100%;">
-        <div class="card-header"><h5>{{ $user->name }} - {{ $project }}</h5></div>
-        <div class="card-body text-secondary">
-            <h5 class="card-title">Hours: <span class="badge badge-primary">{{count($hours)}}</span>
-            </h5>
-        <ul class="list-group list-group">
-            @if(!count($hours))
-               <li class="list-group-item">Project heeft nog geen ingevoerde uren</li>
-            @endif
-        </ul>
-    </div>
+        {!! Form::open(['action' => ['HoursController@update', $hour->id], 'method' => 'POST']) !!} 
+        @csrf
+
+        <div class="form-group">
+        {{Form::label('hours', 'Uren')}}
+        {{Form::number('hours', $hour->hours, ['class' => 'form-control', 'placeholder' => 'Uren', 'required' => 'autofocus'])}}
+        </div>
+        <div class="form-group">
+        {{Form::label('description', 'Beschrijving')}}
+        {{Form::text('description', $hour->description, ['class' => 'form-control', 'placeholder' => 'Beschrijving', 'required' => 'autofocus'])}}
+        </div>
+        
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Uur Bewerken', ['class' =>'btn btn-outline-primary'])}}
+        {!! Form::close() !!} 
 </div>
 @endsection
 
