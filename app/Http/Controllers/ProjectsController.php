@@ -8,6 +8,7 @@ use DB;
 use App\Project;
 use App\User;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Auth;
 
 class ProjectsController extends Controller
 {
@@ -21,6 +22,8 @@ class ProjectsController extends Controller
         $projects = Project::orderBy('updated_at', 'desc')->paginate(12);
         return view('projects.projects')->with('projects', $projects);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
