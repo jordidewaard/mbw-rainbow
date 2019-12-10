@@ -4,6 +4,7 @@
 
 <div class="container">
     <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
+    <a href="/auth/addstudentadmin" class="btn btn-outline-primary row-fix">Student Toevoegen/Verwijderen</a>
 
     <br><br>
     
