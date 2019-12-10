@@ -61,10 +61,10 @@ class HoursController extends Controller
             return redirect('students/view/' . $user)->with('success','Uren zijn aangevraagd.');
     }
 
-        public function addHoursToProject($user, $project) {
+        public function addHoursToProject($user, $projectUserId) {
             $hours = $_POST['hours'];
 
-            if ($project == null) abort(404);
+            if ($projectUserId == null) abort(404);
             // TODO: redirect to error page with meaningful message 'given project does not exist'
 
             if ($user == null) abort(404);
@@ -73,7 +73,7 @@ class HoursController extends Controller
             if ($hours == null) abort(404);
             // TODO: redirect to error page with meaningful message 'given hour is invalid'
 
-            $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
+            $projectUser = DB::table('project_user')->where('id', $projectUserId)->get();
             if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
             
             $projectUserId = $projectUser[0]->id;
@@ -85,7 +85,7 @@ class HoursController extends Controller
             } else {
                 $h = new Hour();
                 $h->project_user_id = $projectUserId;
-                $h->hours=$hours;
+                $h->hours= $hours;
                 $h->date = Carbon::now();
                 if ($hours > 0) {
                     $h->status='added';
