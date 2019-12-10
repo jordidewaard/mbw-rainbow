@@ -6,7 +6,6 @@
     <h2>Project Bewerken</h2><br>
     {!! Form::open(['action' => ['ProjectsController@update', $project->id], 'method' => 'POST']) !!} 
     @csrf
-
         <div class="form-group">
          {{Form::label('title', 'Titel')}}
          {{Form::text('title', $project->title, ['class' => 'form-control', 'placeholder' => 'Titel...', 'required' => 'autofocus'])}}
