@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/students/view/{id}', 'StudentsController@show');
         Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
         Route::get('/clients', 'UsersController@client');
+        Route::get('/add', 'Auth\RegisterController@showRegistrationForm')->name('add');
+        Route::post('/add', 'Auth\RegisterController@register');
     });
 });
 
