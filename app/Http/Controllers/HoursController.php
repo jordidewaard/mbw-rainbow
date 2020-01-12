@@ -98,6 +98,9 @@ class HoursController extends Controller
                 }
                 $h->save();
 
+                if ($user == Auth::user()->id) {
+                    return redirect('overview/' . $user)->with('success','Uren zijn opgeslagen.');
+                }
                 return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
             }
     }

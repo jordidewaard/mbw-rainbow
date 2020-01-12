@@ -1,15 +1,26 @@
 @extends('layouts.app') 
 
 @section('content')
+<?php
+$totalHour = 0;
+?>
 
 <div class="container">
 
-    <a href="/students" class="btn btn-outline-secondary">Terug</a>
+    <a href="/" class="btn btn-outline-secondary">Terug</a>
 
     <br><br>
 
     <div class="card border-secondary mb-3" style="max-width: 100%;">
             <div class="card-header"><h5>{{$student->name}}</h5></div>
+            <div class="progress totalProgress">
+                @foreach ($student->projectUsers as $projectUser)
+                    <?php
+                    $totalHour = $totalHour + $projectUser->totalHours();
+                    ?>
+                @endforeach
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{ $totalHour / count($student->projects) }}%; max-width: 100%"></div>
+            </div>
             <div class="card-body text-secondary">
                 <h5 class="card-title">Projecten: <span class="badge badge-primary">{{count($student->projects)}}</span>
                 </h5>

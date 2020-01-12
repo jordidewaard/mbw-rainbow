@@ -56,6 +56,12 @@ class StudentsController extends Controller
         return view('students.view')->with('student', $student);
     }
 
+    public function showOverview($id)
+    {
+        $student = User::find($id);
+        return view('students.overview')->with('student', $student);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

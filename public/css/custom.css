@@ -92,6 +92,27 @@ nav{
 	padding: 3px 10px 2px;
 }
 
+.progress-bar-striped {
+	background-size: 2rem 2rem !important;
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 2rem 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+.progress.totalProgress {
+	margin: auto;
+	margin-top: 15px;
+	width: 95%;
+	height: 50px;
+}
+
 .hours {
 	display: flex;
 }
