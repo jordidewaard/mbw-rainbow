@@ -29,6 +29,11 @@ class UsersController extends Controller
         return view('clients.clients');
     }
 
+    public function welcome()
+    {
+        return view('emails.welcome');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
