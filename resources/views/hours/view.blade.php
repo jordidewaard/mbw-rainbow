@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ URL::previous() }}" class="btn btn-outline-secondary">Terug</a>
+    <a href="/students/view/{{ $user->id }}" class="btn btn-outline-secondary">Terug</a>
     <br><br>
     <div class="card border-secondary mb-3" style="max-width: 100%;">
         <div class="card-header"><h5>{{ $user->name }} - {{ $project }}</h5></div>
