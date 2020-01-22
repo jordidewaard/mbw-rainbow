@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/form', 'FormController');
     Route::resource('/projects', 'ProjectsController');
     Route::get('/projects/view/{id}', 'ProjectsController@show');
+    Route::get('/projects/delete/{id}', 'ProjectsController@delete');
     Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
     Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
     Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');

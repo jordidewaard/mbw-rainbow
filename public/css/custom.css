@@ -293,3 +293,9 @@ vertical-align: middle;
 	transform: translateY(50%);
     margin-top: -20%;
 }
+
+#finnishButton {
+	width: 87px;
+    margin-left: 10px;
+    border-radius: 0.25rem;
+}
