@@ -22,13 +22,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/form', 'FormController');
     Route::resource('/projects', 'ProjectsController');
     Route::get('/projects/view/{id}', 'ProjectsController@show');
+    Route::get('/projects/delete/{id}', 'ProjectsController@delete');
     Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');
     Route::get('/project/{project}/addstudent/{student}', 'ProjectsController@addStudent');
     Route::get('/project/{project}/deletestudent/{student}', 'ProjectsController@studentProjectDelete');
     Route::get('/studentAdding/{id}', 'ProjectsController@studentProjectAdding');
     
-  	Route::get('/overview/{id}', 'StudentsController@show');
-  
+
+    Route::get('/overview/{id}', 'StudentsController@showOverview');
+    Route::get('/overview/{projectUserId}/hours', 'HoursController@show');
+
     Route::resource('/groups', 'GroupsController');
     Route::get('/groups/view/{id}', 'GroupsController@show');
     Route::resource('/users', 'UsersController');
@@ -37,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/clients', 'UsersController@client');
     Route::resource('/hours', 'HoursController');
-    Route::get('/hours/requesthours/{project}/addhours', 'HoursController@requestHoursToProject');
+    Route::put('/hours/addhours/{userId}/{projectUserId}', 'HoursController@addHoursToProject')->name('addhours.store');
     Route::post('/hours/delete/{id}', 'HoursController@destroy');
     Route::get('/hours/edit/{id}', 'HoursController@edit');
 
@@ -51,10 +54,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/students/view/{projectUserId}/hours', 'HoursController@show');
         Route::get('/students/view/{id}', 'StudentsController@show');
 
+
         Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
         Route::get('/clients', 'UsersController@client');
         Route::get('/add', 'Auth\RegisterController@showRegistrationForm')->name('add');
         Route::post('/add', 'Auth\RegisterController@register');
+
 
     });
 });

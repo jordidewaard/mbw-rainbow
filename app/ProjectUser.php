@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProjectUser extends Model
 {
+    use SoftDeletes;
     protected $table = 'project_user';
 
     public function Project() {
@@ -33,7 +35,7 @@ class ProjectUser extends Model
     }
 
     public function maxHours() {
-        $project = \App\Project::find($this->project_id);
+        $project = \App\Project::withTrashed()->find($this->project_id);
         return $project->duration;
     }
 

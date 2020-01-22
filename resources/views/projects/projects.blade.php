@@ -36,6 +36,11 @@
 
                                             {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
                                             {!!Form::close()!!}
+                                            @if(!$project->trashed())
+                                                <a id="finnishButton" class="btn btn-outline-primary" href="/projects/delete/{{$project->id}}">afronden</a>
+                                            @else
+                                                <a id="finnishButton" class="btn btn-outline-secondary" href="javascript:void(0)">Afgerond</a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr> 
