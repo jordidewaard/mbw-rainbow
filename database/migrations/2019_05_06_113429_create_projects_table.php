@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->integer('duration');
             $table->mediumText('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +30,9 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::table('projects', function (Blueprint $table) {
+
+            $table->dropSoftDeletes();
+        });
     }
 }

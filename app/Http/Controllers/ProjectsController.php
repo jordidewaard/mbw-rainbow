@@ -9,6 +9,8 @@ use App\Project;
 use App\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class ProjectsController extends Controller
 {
@@ -19,7 +21,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('updated_at', 'desc')->paginate(12);
+        $projects = Project::orderBy('updated_at', 'desc')->withTrashed()->paginate(12);
         return view('projects.projects')->with('projects', $projects);
     }
 
@@ -77,7 +79,7 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        $project = Project::find($id);
+        $project = Project::withTrashed()->find($id);
         $users = User::with('projects')->get();
         return view('projects.view')->with('project', $project)->with('users', $users);
     }
@@ -110,7 +112,7 @@ class ProjectsController extends Controller
             'description' => 'required|max:255'
         ]);
 
-        $project = Project::find($id);
+        $project = Project::withTrashed()->find($id);
         $project->title = $request->input('title');
         $project->duration = $request->input('duration');
         $project->description = $request->input('description');
@@ -118,6 +120,11 @@ class ProjectsController extends Controller
         $project->save(); 
         
         return redirect('/projects')->with('success', 'Project is bijgewerkt');
+    }
+
+    public function delete($id) {
+        Project::where('id', $id)->delete();
+        return redirect('/projects')->with('success', 'Project is afgerond');
     }
 
     /**
@@ -128,9 +135,9 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        $project = Project::find($id);
+        $project = Project::withTrashed()->find($id);
         
-        $project->delete();
+        $project->forceDelete();
         
         return redirect('/projects')->with('success', 'Project is verwijderd');
     }
