@@ -31,6 +31,7 @@
                    @include('layouts.messages')
                </div>
             <br>
+            @yield('deleteWarning')
             @yield('content')
         </main>
     </div>
