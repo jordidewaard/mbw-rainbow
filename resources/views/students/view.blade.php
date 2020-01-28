@@ -3,6 +3,7 @@
 @section('content')
 <?php
 $totalHour = 0;
+$totalHoursPercentage = 0;
 ?>
 
 <div class="container">
@@ -17,9 +18,18 @@ $totalHour = 0;
                 @foreach ($student->projectUsers as $projectUser)
                     <?php
                     $totalHour = $totalHour + $projectUser->totalHours();
+                    $totalHoursPercentage = $projectUser->totalHoursPercentage($totalHour);
                     ?>
                 @endforeach
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{ $totalHour / count($student->projects) }}%; max-width: 100%"></div>
+                <span class="MainProgress-type">{{ $totalHoursPercentage['percentage'] }}%</span>
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="
+                    @if($totalHoursPercentage == 0)
+                        width:0%
+                    @elseif($totalHoursPercentage != 0)
+                        width:{{ $totalHoursPercentage['percentage'] }}%
+                    @endif; max-width: 100%">
+                </div>
+                <h5 id="totalProgressTekst">{{ $totalHour }} / {{ $totalHoursPercentage['totalHours'] }}</h5>
             </div>
             <div class="card-body text-secondary">
                 <h5 class="card-title">Projecten: <span class="badge badge-primary">{{count($student->projects)}}</span>
@@ -35,11 +45,11 @@ $totalHour = 0;
                                 <br>
                                 <div class="hours">
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: {{ $projectUser->totalHours() }}%; max-width: 100%;">
-                                            <span class="sr-only">{{ $projectUser->totalHours() }}% Complete</span>
+                                        <div class="progress-bar" role="progressbar" style="width: {{ $projectUser->HoursPercentage() }}%; max-width: 100%;">
+                                            <span class="sr-only">{{ $projectUser->HoursPercentage() }}% Complete</span>
                                         </div>
                                         <span class="progress-type">Uren</span>
-                                        <span class="progress-completed">{{ $projectUser->totalHours() }}%</span>
+                                        <span class="progress-completed">{{ $projectUser->HoursPercentage() }}%</span>
                                     </div>
                                     {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@addHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
                                     @csrf
@@ -47,7 +57,7 @@ $totalHour = 0;
                                         {{Form::number('hours', null,['class' => 'hoursInput', 'placeholder' => 'Uren', 'required' => 'autofocus'])}}
                                         <div class="ui-group-buttons">
                                         @method('PUT')
-                                        {{Form::submit('Uren aanpassen', ['class' =>'btn btn-success'])}}
+                                        {{Form::submit('Aanpassen', ['class' =>'btn btn-success'])}}
                                         </div>
                                     </div>
                                     {!! Form::close() !!} 

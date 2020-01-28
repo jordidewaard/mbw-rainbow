@@ -15,7 +15,7 @@ class ProjectUser extends Model
     }
 
     public function ProjectName() {
-    	$project = \App\Project::find($this->project_id);
+    	$project = \App\Project::withTrashed()->find($this->project_id);
 
         if ( $project == null ) {
             return null;
@@ -39,9 +39,21 @@ class ProjectUser extends Model
         return $project->duration;
     }
 
-    public function totalHours() {
+    public function HoursPercentage() {
         $percentage = $this->hours()->sum('hours') / $this->maxHours() * 100;
         $percentage = round($percentage, 1);
     	return $percentage;
+    }
+
+    public function totalHours() {
+        $maxHours = $this->hours()->sum('hours');
+        return $maxHours;
+    }
+
+    public function totalHoursPercentage($hours) {
+        $totalHours = 400;
+        $percentage = $hours / $totalHours * 100;
+        $percentage = round($percentage, 1);
+        return array('percentage' => $percentage, 'totalHours' => $totalHours);
     }
 }
