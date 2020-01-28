@@ -30,12 +30,7 @@
                                     <td>
                                         <div class="row row-fix">
                                             <a class="btn btn-outline-success a-fix-table" href="/projects/{{$project->id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            {!!Form::open(['action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
-                                            @csrf
-                                            {{Form::hidden('_method', 'DELETE')}}
-
-                                            {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
-                                            {!!Form::close()!!}
+                                            <button class='btn btn-outline-danger' onclick="showDeleteForm({{$project->id}})"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
                                             @if(!$project->trashed())
                                                 <a id="finnishButton" class="btn btn-outline-primary" href="/projects/delete/{{$project->id}}">afronden</a>
                                             @else
@@ -55,4 +50,24 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('deleteWarning')
+        @if(count($projects) > 0)
+            <div id="deleteWarningForm" class="deleteWarningForm hidden opacityContainer">
+                <div class="deleteWarningFormContainer">
+                    <div class="card">
+                        <h3>Waarschuwing</h3>
+                        <p>weet je zeker dat je dit wilt verwijderen</p>
+                        {!!Form::open(['id' => 'deleteForm', 'action' => ['ProjectsController@destroy', $project->id], 'method' => 'POST'])!!}
+                        @csrf
+                        {{Form::hidden('_method', 'DELETE')}}
+
+                        {{Form::button('Verwijderen', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
+                        <a class='btn btn-outline-secondary' onclick="hideDeleteForm()">Annuleren</a>
+                        {!!Form::close()!!}
+                    </div>
+                </div>
+            </div>
+        @endif
 @endsection

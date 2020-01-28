@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -54,11 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function projects(){
-        return $this->belongsToMany('App\Project');
+        return $this->belongsToMany('App\Project')->withTrashed();
     }
 
     public function projectUsers(){
-        return $this->hasMany('App\ProjectUser');
+        return $this->hasMany('App\ProjectUser')->withTrashed();
     }
 
     public function hours(){
