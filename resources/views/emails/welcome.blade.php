@@ -4,7 +4,7 @@
 
     <div class="container">
         <h2></h2>
-        <a href="/login">klik om in te loggen</a>
+        <a href="/home">klik om terug te gaan naar home</a>
     </div>
 
 @endsection

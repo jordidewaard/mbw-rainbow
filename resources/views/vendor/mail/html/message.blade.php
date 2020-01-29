@@ -6,20 +6,16 @@
         @endcomponent
     @endslot
 
+
     {{-- Body --}}
-    {{ $slot }}
+    {{ "Hier is je auto-gegenereerde password:" }}
+    <br>
+    {{ "Klik hieronder om in te loggen op je account" }}
+    <br>
+    <br>
+    {{ config('app.url') }}
 
 
-
-
-    {{-- Subcopy --}}
-    @isset($subcopy)
-        @slot('subcopy')
-            @component('mail::subcopy')
-                {{ $subcopy }}
-            @endcomponent
-        @endslot
-    @endisset
 
     {{-- Footer --}}
     @slot('footer')
