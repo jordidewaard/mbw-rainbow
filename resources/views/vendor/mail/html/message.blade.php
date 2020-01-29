@@ -8,7 +8,7 @@
 
 
     {{-- Body --}}
-    {{ "Hier is je auto-gegenereerde password:" }}
+    {{ "Hier is je automatisch gegenereerde wachtwoord:" }}
     <br>
     {{ "Klik hieronder om in te loggen op je account" }}
     <br>
