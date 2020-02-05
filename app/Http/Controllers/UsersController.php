@@ -34,6 +34,7 @@ class UsersController extends Controller
         return view('emails.welcome');
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

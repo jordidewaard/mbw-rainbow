@@ -83,7 +83,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $hashed_random_password = (str_random(12)),
+            'password' => $hashed_random_password = Hash::make(str_random(8)),
             'role' => User::STUDENT_TYPE,
         ]);
     }

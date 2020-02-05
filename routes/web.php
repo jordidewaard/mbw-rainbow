@@ -19,6 +19,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('changepassword', 'ChangePasswordController@index');
+    Route::post('changepassword', 'ChangePasswordController@store')->name('change.password');
     Route::resource('/form', 'FormController');
     Route::resource('/projects', 'ProjectsController');
     Route::get('/projects/view/{id}', 'ProjectsController@show');
@@ -48,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
+
         Route::get('/teachers', 'AdminController@showteachers');
         Route::get('/teachers/view/{id}', 'AdminController@show');
         Route::resource('/students', 'StudentsController');
