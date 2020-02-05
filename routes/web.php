@@ -46,6 +46,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/hours/update/{id}', 'HoursController@update');
 
+    Route::group(['middleware' => 'App\Http\Middleware\IsClient'], function()
+    {
+        Route::get('/clients/{id}', 'UsersController@client');  
+    });
+
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
     {
         Route::get('/teachers', 'AdminController@showteachers');

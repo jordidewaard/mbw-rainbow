@@ -29,6 +29,11 @@ class UsersController extends Controller
         return view('clients.clients');
     }
 
+    public function showClient()
+    {
+        return view('clients.show');
+    }
+
     public function welcome()
     {
         return view('emails.welcome');

@@ -18,6 +18,8 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->integer('duration');
             $table->mediumText('description');
+            $table->integer('client_id')->nullable()->unsigned();
+            $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
