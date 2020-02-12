@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
+
 class ChangePasswordController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -28,11 +31,13 @@ class ChangePasswordController extends Controller
         return view('changePassword');
     }
 
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    use RegistersUsers;
     public function store(Request $request)
     {
         $request->validate([
@@ -40,8 +45,8 @@ class ChangePasswordController extends Controller
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-        dd('Password change successfully.');
+        return redirect('welcome')->with('success');
     }
+
 }

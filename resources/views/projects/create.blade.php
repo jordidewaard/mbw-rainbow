@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
-            {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}
+            {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder', 'required' => 'Link...'])!!}
         </div>
           {{Form::submit('Creëren', ['class' =>'btn btn-outline-primary'])}}
     {!! Form::close() !!} 
