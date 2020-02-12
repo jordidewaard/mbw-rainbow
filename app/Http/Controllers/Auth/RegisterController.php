@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,7 +65,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['string', 'min:8', 'confirmed'],
+            'password' => ['string', 'min:8'],
+            'checkbox' => ['required', 'max:1']
         ]);
     }
 
@@ -80,11 +80,20 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => User::STUDENT_TYPE,
-        ]);
+        if ($data['checkbox'] == "1") {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' =>  Hash::make(str_random(8)),
+                'role' => User::CLIENT_TYPE,
+            ]);
+            } else {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make(str_random(8)),
+                'role' => User::STUDENT_TYPE,
+            ]);
+        }
     }
 }
