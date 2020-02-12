@@ -46,7 +46,6 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:75',
             'duration' => 'required|max:2000',
@@ -63,7 +62,7 @@ class ProjectsController extends Controller
         $project->title = $request->input('title');
         $project->duration = $request->input('duration');
         $project->description = $request->input('description');
-        $project->client_id = $request->input('client_id');
+        $project->client_id = $request->input('clientUser');
         $project->link = $request->input('link');
         $project->save();
         $user = User::find('id');
@@ -95,8 +94,9 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
+        $users = User::orderBy('name', 'asc')->where('role', 'C')->get();
         $project = Project::find($id);
-        return view('projects.edit')->with('project', $project);
+        return view('projects.edit')->with('project', $project)->with('users', $users);
     }
 
     /**

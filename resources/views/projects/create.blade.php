@@ -22,11 +22,10 @@
         <div class="form-group">
             {{Form::label('client', 'Client')}}
             <?php $allUsers = []; ?>
-            <?php array_push($allUsers, "Select CLient"); ?>
               @foreach ($users as $user)
-                <?php array_push($allUsers, $user['name']); ?>
+                <?php array_push($allUsers, [$user['id'] => $user['name']]); ?>
               @endforeach
-            {{Form::select('client', $allUsers, ['class' => 'form-control editor'])}}
+            {{Form::select('clientUser', $allUsers, null, ['class' => 'form-control editor', 'placeholder' => 'Select Client...'])}}
         </div>
         <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
