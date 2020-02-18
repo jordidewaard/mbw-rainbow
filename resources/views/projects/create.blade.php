@@ -21,11 +21,7 @@
         </div>
         <div class="form-group">
             {{Form::label('client', 'Client')}}
-            <?php $allUsers = []; ?>
-              @foreach ($users as $user)
-                <?php array_push($allUsers, [$user['id'] => $user['name']]); ?>
-              @endforeach
-            {{Form::select('clientUser', $allUsers, null, ['class' => 'form-control editor', 'placeholder' => 'Select Client...'])}}
+            {{Form::select('clientUser', $users, null, ['class' => 'form-control editor', 'placeholder' => 'Select Client...'])}}
         </div>
         <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
