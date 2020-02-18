@@ -34,7 +34,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('name', 'asc')->where('role', 'C')->get();
+        $users = User::orderBy('name', 'asc')->where('role', 'C')->pluck('name', 'id');
         return view('projects.create')->with('users', $users);
     }
 
@@ -94,7 +94,7 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        $users = User::orderBy('name', 'asc')->where('role', 'C')->get();
+        $users = User::orderBy('name', 'asc')->where('role', 'C')->pluck('name', 'id');;
         $project = Project::find($id);
         return view('projects.edit')->with('project', $project)->with('users', $users);
     }
