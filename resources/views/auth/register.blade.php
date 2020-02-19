@@ -26,7 +26,8 @@
                                 @endif
                             </div>
                         </div>
-                        <!--
+
+                        <!-- uncomment this if admin account gets lost and you need a quick way to add a new user
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -65,13 +66,19 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="checkbox" value="1">
+                                    <input class="form-check-input" type="radio" name="checkbox" id="checkbox" value="1">
                                     <label class="form-check-label" for="remember">
                                         {{ __('Client') }}
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="checkbox" value="2">
+                                    <input class="form-check-input" type="radio" name="checkbox" id="checkbox" value="2">
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Leraar') }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="checkbox" id="checkbox" value="3">
                                     <label class="form-check-label" for="remember">
                                         {{ __('Student') }}
                                     </label>

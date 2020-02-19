@@ -87,7 +87,13 @@ class RegisterController extends Controller
                 'password' =>  Hash::make(str_random(8)),
                 'role' => User::CLIENT_TYPE,
             ]);
-            } else {
+            } elseif ($data['checkbox'] == "2") {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make(str_random(8)),
+                'role' => User::ADMIN_TYPE,
+            ]); } else {
             return User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
