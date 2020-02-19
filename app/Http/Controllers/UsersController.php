@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Project;
+use App\ProjectUser;
+use App\Hour;
 
 class UsersController extends Controller
 {
@@ -26,12 +30,30 @@ class UsersController extends Controller
 
     public function client()
     {
-        return view('clients.clients');
+        $clients = User::orderBy('name', 'asc')->where('role', 'C')->paginate(12);
+        $projects = Project::pluck('client_id');
+        return view('clients.clients')->with('clients', $clients)->with('projects', $projects);
     }
 
-    public function showClient()
+    public function showClient($id)
     {
-        return view('clients.show');
+        $projects = Project::where('client_id', $id)->pluck('id');
+        $projectusers = [];
+        foreach ($projects as $project) {
+            $ProjectUsers = ProjectUser::where('project_id', $project)->pluck('id');
+            foreach ($ProjectUsers as $ProjectUser) {
+                array_push($projectusers, $ProjectUser);
+            }
+        }
+        $allHours = [];
+        foreach ($projectusers as $projectuser) {
+            $hours = Hour::where('project_user_id', $projectuser)->where('status', 'requested')->get();
+            foreach ($hours as $hour) {
+                array_push($allHours, $hour);
+            }
+        }
+
+        return view('clients.show')->with('hours', $allHours);
     }
 
     public function welcome()
