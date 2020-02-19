@@ -51,7 +51,7 @@ $totalHoursPercentage = 0;
                                         <span class="progress-type">Uren</span>
                                         <span class="progress-completed">{{ $projectUser->HoursPercentage() }}%</span>
                                     </div>
-                                    {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@addHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
+                                    {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@requestHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
                                     @csrf
                                     <div class="hoursInputButton">
                                         {{Form::number('hours', null,['class' => 'hoursInput', 'placeholder' => 'Uren', 'required' => 'autofocus'])}}

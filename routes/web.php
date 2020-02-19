@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/clients', 'UsersController@client');
     Route::resource('/hours', 'HoursController');
-    Route::put('/hours/addhours/{userId}/{projectUserId}', 'HoursController@addHoursToProject')->name('addhours.store');
+    Route::put('/hours/requesthours/{userId}/{projectUserId}', 'HoursController@requestHoursToProject')->name('requesthours.store');
     Route::post('/hours/delete/{id}', 'HoursController@destroy');
     Route::get('/hours/edit/{id}', 'HoursController@edit');
 
@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => 'App\Http\Middleware\IsClient'], function()
     {
         Route::get('/clients/{id}', 'UsersController@client');  
+        Route::get('/clients/view/{id}', 'UsersController@showClient');
     });
 
     Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
@@ -61,10 +62,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/students', 'StudentsController');
         Route::get('/students/view/{projectUserId}/hours', 'HoursController@show');
         Route::get('/students/view/{id}', 'StudentsController@show');
-
+        Route::get('/clients', 'UsersController@client');
 
         Route::put('/hours/addhours/{userId}/{projectId}', 'HoursController@addHoursToProject')->name('addhours.store');
-        Route::get('/clients', 'UsersController@client');
         Route::get('/add', 'Auth\RegisterController@showRegistrationForm')->name('add');
         Route::post('/add', 'Auth\RegisterController@register');
 

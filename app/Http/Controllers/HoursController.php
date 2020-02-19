@@ -32,39 +32,9 @@ class HoursController extends Controller
 
     }
 
-    public function requestHoursToProject($user, $project)
+    public function requestHoursToProject($user, $projectUserId)
     {
         $hours = $_POST['hours'];
-
-        if ($project == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given project does not exist'
-
-        if ($user == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given project does not exist'
-
-        if ($hours == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given hour is invalid'
-
-        $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
-        if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
-
-        $projectUserId = $projectUser[0]->id;
-
-        //dd($projectUser);
-
-        $h = new Hour();
-        $h->project_user_id = $projectUserId;
-        $h->hours = $hours;
-        $h->date = Carbon::now();
-        $h->status = 'requested';
-        $h->description = 'Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
-        $h->save();
-
-        return redirect('students/view/' . $user)->with('success', 'Uren zijn aangevraagd.');
-    }
-  
-        public function addHoursToProject($user, $projectUserId) {
-            $hours = $_POST['hours'];
 
             if ($projectUserId == null) abort(404);
             // TODO: redirect to error page with meaningful message 'given project does not exist'
@@ -80,7 +50,6 @@ class HoursController extends Controller
             
             $projectUserId = $projectUser[0]->id;
 
-            //dd($projectUser);
 
             if ($hours == 0) {
                 return redirect('students/view/' . $user)->with('error','Kan niet 0 uur toevoegen.');
@@ -90,19 +59,60 @@ class HoursController extends Controller
                 $h->hours= $hours;
                 $h->date = Carbon::now();
                 if ($hours > 0) {
-                    $h->status='added';
-                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+                    $h->status='requested';
+                    $h->description='Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
                 } else if ($hours < 0) {
                     $h->status='removed';
-                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
+                    $h->description='Student ' . $user . ' heeft ' . $hours . ' uren verwijderd';
                 }
                 $h->save();
 
                 if ($user == Auth::user()->id) {
                     return redirect('overview/' . $user)->with('success','Uren zijn opgeslagen.');
                 }
-                return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
             }
+    }
+  
+    public function addHoursToProject($user, $projectUserId) {
+        $hours = $_POST['hours'];
+
+        if ($projectUserId == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+        if ($user == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
+
+        if ($hours == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given hour is invalid'
+
+        $projectUser = DB::table('project_user')->where('id', $projectUserId)->get();
+        if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+        
+        $projectUserId = $projectUser[0]->id;
+
+        //dd($projectUser);
+
+        if ($hours == 0) {
+            return redirect('students/view/' . $user)->with('error','Kan niet 0 uur toevoegen.');
+        } else {
+            $h = new Hour();
+            $h->project_user_id = $projectUserId;
+            $h->hours= $hours;
+            $h->date = Carbon::now();
+            if ($hours > 0) {
+                $h->status='added';
+                $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+            } else if ($hours < 0) {
+                $h->status='removed';
+                $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
+            }
+            $h->save();
+
+            if ($user == Auth::user()->id) {
+                return redirect('overview/' . $user)->with('success','Uren zijn opgeslagen.');
+            }
+            return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
+        }
     }
 
     public function acceptHoursRequest($project)

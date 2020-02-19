@@ -369,3 +369,8 @@ vertical-align: middle;
 .btn.btn-outline-danger {
 	border-radius: 5px !important;
 }
+
+#clientUser {
+	border-radius: 5px;
+	
+}
