@@ -25,13 +25,29 @@
                                 <tr>
                                     <td class="text-left">Aangevraagde uren: {{$hour->hours}}</td>
                                     <td>
-                                    <td class="text-center">{{$hour->created_at}}</td>
+                                    <td class="text-center">{{$hour->updated_at}}</td>
                                     <td>
-                                        <div class="row row-fix">
-                                            <a class="btn btn-outline-success a-fix-table" href="/hours/{{$hour->hour_id}}/edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            <button class='btn btn-outline-danger' onclick="showDeleteForm({{$hour->hour_id}})"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
-                                        </div>
-                                    </td>
+                                		@if (Auth::user()->role == 'C')
+                                			@if($hour->status == 'requested')
+                                			    <div class="row row-fix">
+                                			    	<form method="POST" action="/hours/acceptHours/{{ $hour->hour_id }}/{{ $hour->hours }}">
+                                			    		@csrf
+                                			        	<button class="btn btn-outline-success a-fix-table"><i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                                			    	</form>
+                                			    	<form method="POST" action="/hours/rejectHours/{{ $hour->hour_id }}/{{ $hour->hours }}">
+                                			    		@csrf
+                                			        	<button class='btn btn-outline-danger'><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                                			        </form>
+                                			    </div>
+                                			@else
+                                				<div class="row row-fix">
+                                					<button class='btn btn-outline-secondary' onclick="javascript:void(0)">{{ $hour->status }}</button></div>
+                                			@endif
+                                		@elseif (Auth::user() && Auth::user()->role == 'A')
+                                			<div class="row row-fix">
+                                				<button class='btn btn-outline-secondary' onclick="javascript:void(0)">{{ $hour->status }}</button></div>
+                                		@endif
+                                	</td>
                                 </tr> 
                             @endforeach
                         </table> 

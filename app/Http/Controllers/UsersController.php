@@ -7,6 +7,7 @@ use App\User;
 use App\Project;
 use App\ProjectUser;
 use App\Hour;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -35,25 +36,46 @@ class UsersController extends Controller
         return view('clients.clients')->with('clients', $clients)->with('projects', $projects);
     }
 
+    function aasort (&$array, $key) {
+        $sorter=array();
+        $ret=array();
+        reset($array);
+        foreach ($array as $ii => $va) {
+            $sorter[$ii]=$va[$key];
+        }
+        arsort($sorter);
+        foreach ($sorter as $ii => $va) {
+            $ret[$ii]=$array[$ii];
+        }
+        $array=$ret;
+    }
+
+
     public function showClient($id)
     {
-        $projects = Project::where('client_id', $id)->pluck('id');
-        $projectusers = [];
-        foreach ($projects as $project) {
-            $ProjectUsers = ProjectUser::where('project_id', $project)->pluck('id');
-            foreach ($ProjectUsers as $ProjectUser) {
-                array_push($projectusers, $ProjectUser);
+        if (Auth::id() == $id && Auth::user()->role == 'C' || Auth::user()->role == 'A') {
+            $projects = Project::where('client_id', $id)->pluck('id');
+            $projectusers = [];
+            foreach ($projects as $project) {
+                $ProjectUsers = ProjectUser::where('project_id', $project)->pluck('id');
+                foreach ($ProjectUsers as $ProjectUser) {
+                    array_push($projectusers, $ProjectUser);
+                }
             }
-        }
-        $allHours = [];
-        foreach ($projectusers as $projectuser) {
-            $hours = Hour::where('project_user_id', $projectuser)->where('status', 'requested')->get();
-            foreach ($hours as $hour) {
-                array_push($allHours, $hour);
+            $allHours = [];
+            foreach ($projectusers as $projectuser) {
+                $hours = Hour::where('project_user_id', $projectuser)->get();
+                foreach ($hours as $hour) {
+                    array_push($allHours, $hour);
+                }
             }
-        }
 
-        return view('clients.show')->with('hours', $allHours);
+            UsersController::aasort($allHours,"updated_at");
+
+            return view('clients.show')->with('hours', $allHours);
+        } else {
+            return redirect()->back()->with('error', 'Geen toegang tot deze locatie!');
+        }
     }
 
     public function welcome()
