@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="/students/view/{{ $user->id }}" class="btn btn-outline-secondary">Terug</a>
+    <a href="/overview/{{ $user->id }}" class="btn btn-outline-secondary">Terug</a>
     <br><br>
     <div class="card border-secondary mb-3" style="max-width: 100%;">
         <div class="card-header"><h5>{{ $user->name }} - {{ $project }}</h5></div>
@@ -16,7 +16,6 @@
                             <th>Hours</th>
                             <th>Description</th>
                             <th>Date</th>
-                            <th class="td-actions"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,18 +29,6 @@
                                 <td>{{ $hour->hours }}</td>
                                 <td>{{ $hour->description }}</td>
                                 <td>{{ $hour->date }}</td>
-                                <td class="td-actions">
-                                    <div class="tableContainer">
-                                        <form method="GET" action="/hours/edit/{{ $hour->hour_id }}">
-                                            @csrf
-                                            <button class="editButton"></button>
-                                        </form>
-                                        <form method="POST" action="/hours/delete/{{ $hour->hour_id }}">
-                                            @csrf
-                                            <button class="deleteButton"></button>
-                                        </form>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
