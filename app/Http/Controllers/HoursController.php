@@ -32,6 +32,7 @@ class HoursController extends Controller
 
     }
 
+    //creates an requested hour record in the DB
     public function requestHoursToProject($user, $projectUserId)
     {
         $hours = $_POST['hours'];
@@ -73,6 +74,7 @@ class HoursController extends Controller
             }
     }
 
+    //accepts a requested hour record
     public function acceptHoursRequest($hourId, $hours)
     {
         $hour = Hour::where('hour_id', $hourId)->first();
@@ -93,6 +95,7 @@ class HoursController extends Controller
         return redirect('clients/view/' . $userId)->with('success','Uren zijn geaccepteerd.');
     }
 
+    //rejects a requested hour record
     public function rejectHoursRequest($hourId, $hours)
     {
         $hour = Hour::where('hour_id', $hourId)->first();

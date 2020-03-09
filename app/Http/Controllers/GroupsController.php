@@ -36,6 +36,8 @@ class GroupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //stores a group in the DB
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
