@@ -28,7 +28,7 @@ class UsersController extends Controller
         return view('students.students');
     }
 
-
+    //shows a list of all clients
     public function client()
     {
         $clients = User::orderBy('name', 'asc')->where('role', 'C')->paginate(12);
@@ -36,6 +36,7 @@ class UsersController extends Controller
         return view('clients.clients')->with('clients', $clients)->with('projects', $projects);
     }
 
+    //sorts the given data array
     function aasort (&$array, $key) {
         $sorter=array();
         $ret=array();
@@ -50,7 +51,7 @@ class UsersController extends Controller
         $array=$ret;
     }
 
-
+    //shows a client if the current user is an admin or client
     public function showClient($id)
     {
         if (Auth::id() == $id && Auth::user()->role == 'C' || Auth::user()->role == 'A') {

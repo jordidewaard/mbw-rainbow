@@ -19,6 +19,8 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //shows all projects
     public function index()
     {
         $projects = Project::orderBy('updated_at', 'desc')->withTrashed()->paginate(12);
@@ -32,6 +34,8 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //returns create form whit list of all clients
     public function create()
     {
         $users = User::orderBy('name', 'asc')->where('role', 'C')->pluck('name', 'id');
@@ -44,6 +48,8 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //stores a project
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -79,6 +85,8 @@ class ProjectsController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
+
+    //shows a single project
     public function show($id)
     {
         $project = Project::withTrashed()->find($id);
@@ -106,6 +114,8 @@ class ProjectsController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
+
+    //updates existing record in the DB
     public function update(Request $request, $id)
     {
 
@@ -125,6 +135,7 @@ class ProjectsController extends Controller
         return redirect('/projects')->with('success', 'Project is bijgewerkt');
     }
 
+    //softDeletes a record
     public function delete($id) {
         Project::where('id', $id)->delete();
         return redirect('/projects')->with('success', 'Project is afgerond');
@@ -136,6 +147,8 @@ class ProjectsController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
+
+    //destroys a softDeleted record
     public function destroy($id)
     {
         $project = Project::withTrashed()->find($id);
@@ -145,6 +158,7 @@ class ProjectsController extends Controller
         return redirect('/projects')->with('success', 'Project is verwijderd');
     }
 
+    //shows the addStudent view with all students
     public function addStudentsToProject($id)
     {   
         $project = Project::find($id);
@@ -152,6 +166,7 @@ class ProjectsController extends Controller
         return view('students.addstudent', compact('project', 'students'));
     }
 
+    //adds a sstudentent to the selected project
     public function addStudent(Project $project, User $student){
 
         if(!$project->users->contains($student->id)){
@@ -162,6 +177,7 @@ class ProjectsController extends Controller
         return redirect()->back()->with('success', 'Student: ' . $student->name . 'succesvol toegevoegd aan: ' . $project->title);
     }
 
+    //removes a user from a project
     public function studentProjectDelete(Project $project, User $student)
     {
         if($project->users->contains($student->id)){
