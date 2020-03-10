@@ -40,13 +40,13 @@ class ProjectUser extends Model
     }
 
     public function HoursPercentage() {
-        $percentage = $this->hours()->sum('hours') / $this->maxHours() * 100;
+        $percentage = $this->hours()->where('status', '!=', 'rejected')->where('status', '!=', 'requested')->sum('hours') / $this->maxHours() * 100;
         $percentage = round($percentage, 1);
     	return $percentage;
     }
 
     public function totalHours() {
-        $maxHours = $this->hours()->sum('hours');
+        $maxHours = $this->hours()->where('status', '!=', 'rejected')->where('status', '!=', 'requested')->sum('hours');
         return $maxHours;
     }
 

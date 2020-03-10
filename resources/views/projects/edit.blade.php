@@ -19,8 +19,12 @@
           {!!Form::textarea('description', $project->description, ['id' => '', 'class' => 'form-control', 'placeholder' => 'Omschrijving...', 'required' => 'autofocus'])!!}
         </div>
         <div class="form-group">
+            {{Form::label('client', 'Client')}}
+            {{Form::select('clientUser', $users, $project->client_id, ['class' => 'form-control editor', 'placeholder' => 'Select Client...'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
-            {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}
+            {!!Form::text('link', $project->link, ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}
         </div>
           {{Form::hidden('_method', 'PUT')}}
           {{Form::submit('Project Bewerken', ['class' =>'btn btn-outline-primary'])}}

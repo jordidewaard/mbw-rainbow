@@ -17,6 +17,7 @@ class StudentsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    //shows all students
     public function index()
     {
         $students = User::orderBy('name', 'asc')->where('role', 'S')->paginate(10);
@@ -50,12 +51,15 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //shows the data of the selected user in detail
     public function show($id)
     {
         $student = User::find($id);
         return view('students.view')->with('student', $student);
     }
 
+    //shows the data of the selected user in detail
     public function showOverview($id)
     {
         $student = User::find($id);

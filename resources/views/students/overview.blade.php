@@ -52,7 +52,7 @@ $totalHoursPercentage = 0;
                                         <span class="progress-type">Uren</span>
                                         <span class="progress-completed">{{ $projectUser->HoursPercentage() }}%</span>
                                     </div>
-                                    {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@addHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
+                                    {!! Form::open(['id' => 'form-container' . $projectUser->id, 'action' => ['HoursController@requestHoursToProject', $student->id, $projectUser->id], 'method' => 'POST']) !!} 
                                     @csrf
                                     <div class="hoursInputButton">
                                         {{Form::number('hours', null,['class' => 'hoursInput', 'placeholder' => 'Uren', 'required' => 'autofocus'])}}
@@ -69,20 +69,6 @@ $totalHoursPercentage = 0;
               <hr>
               <small>Geschreven op {{$student->created_at}}</small>
               <hr>
-
-              <div>
-                    <div class="btn-group" role="group" aria-label="First group">
-                        <a class="btn btn-outline-success" href="/students/{{$student->id}}/edit" class=""><i class="fa fa-edit" aria-hidden="true"></i></a>
-                    </div>
-            
-                    <div class="btn-group" role="group" aria-label="Second group">
-                        {!!Form::open(['action' => ['StudentsController@destroy', $student->id], 'method' => 'POST'])!!}
-                        @csrf
-                        {{Form::hidden('_method', 'DELETE')}}
-                        {{Form::button('<i class="fa fa-minus-circle" aria-hidden="true"></i>', ['class' => 'btn btn-outline-danger', 'type' => 'submit'])}}
-                        {!!Form::close()!!}
-                    </div>
-                </div>
             </div>
     </div>
 </div>

@@ -20,6 +20,10 @@
           {!!Form::textarea('description','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Omschrijving...', 'required' => 'autofocus'])!!}
         </div>
         <div class="form-group">
+            {{Form::label('client', 'Client')}}
+            {{Form::select('clientUser', $users, null, ['class' => 'form-control editor', 'placeholder' => 'Select Client...'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
             {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}
         </div>

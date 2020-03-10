@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center hpBlocks">
-        @if (Auth::user() && (Auth::user()->role == 'S' | Auth::user()->role == 'A'))
+        @if (Auth::user() && (Auth::user()->role == 'S' || Auth::user() && Auth::user()->role == 'A'))
         <div class="col-sm-3">
             <a href="/projects">
                 <div class="card bg-Green">
@@ -60,6 +60,7 @@
                 </div>
             </a>
         </div>
+        @if (Auth::user() && Auth::user()->role == 'A')
         <div class="col-sm-3">
             <a href="/clients">
                 <div class="card bg-Blue">
@@ -70,7 +71,23 @@
                 </div>
             </a>
         </div>
+        @endif
+
     </div>
+    @endif
+    @if (Auth::user() && Auth::user()->role == 'C')
+      <div class="row justify-content-center hpBlocks">
+        <div class="col-sm-3">
+            <a href="/clients/view/{{ Auth::user()->id }}">
+                <div class="card bg-Blue">
+                  <svg class="card-img-top" xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0zm10 5h4v2h-4zm0 0h4v2h-4z"/><path d="M10 16v-1H3.01L3 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-4h-7v1h-4zm10-9h-4.01V5l-2-2h-4l-2 2v2H4c-1.1 0-2 .9-2 2v3c0 1.11.89 2 2 2h6v-2h4v2h6c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0h-4V5h4v2z"/></svg>
+                  <div class="card-body">
+                    Projectbegeleiders
+                  </div>
+                </div>
+            </a>
+        </div>
+      </div>
     @endif
 </div>
 @endsection

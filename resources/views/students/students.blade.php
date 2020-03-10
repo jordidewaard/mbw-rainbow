@@ -15,7 +15,6 @@
 
                 <div class="card-body">
                         @if(count($students) > 0)
-
                         <table class="table table-striped">
                                 <tr class="active">
                                     <th><h4>Naam</h4></th>

@@ -32,39 +32,10 @@ class HoursController extends Controller
 
     }
 
-    public function requestHoursToProject($user, $project)
+    //creates an requested hour record in the DB
+    public function requestHoursToProject($user, $projectUserId)
     {
         $hours = $_POST['hours'];
-
-        if ($project == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given project does not exist'
-
-        if ($user == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given project does not exist'
-
-        if ($hours == null) abort(404);
-        // TODO: redirect to error page with meaningful message 'given hour is invalid'
-
-        $projectUser = DB::table('project_user')->where('project_id', $project)->where('user_id', $user)->get();
-        if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
-
-        $projectUserId = $projectUser[0]->id;
-
-        //dd($projectUser);
-
-        $h = new Hour();
-        $h->project_user_id = $projectUserId;
-        $h->hours = $hours;
-        $h->date = Carbon::now();
-        $h->status = 'requested';
-        $h->description = 'Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
-        $h->save();
-
-        return redirect('students/view/' . $user)->with('success', 'Uren zijn aangevraagd.');
-    }
-  
-        public function addHoursToProject($user, $projectUserId) {
-            $hours = $_POST['hours'];
 
             if ($projectUserId == null) abort(404);
             // TODO: redirect to error page with meaningful message 'given project does not exist'
@@ -80,7 +51,6 @@ class HoursController extends Controller
             
             $projectUserId = $projectUser[0]->id;
 
-            //dd($projectUser);
 
             if ($hours == 0) {
                 return redirect('students/view/' . $user)->with('error','Kan niet 0 uur toevoegen.');
@@ -90,44 +60,56 @@ class HoursController extends Controller
                 $h->hours= $hours;
                 $h->date = Carbon::now();
                 if ($hours > 0) {
-                    $h->status='added';
-                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren toegevoegd';
+                    $h->status='requested';
+                    $h->description='Student ' . $user . ' heeft ' . $hours . ' uren aangevraagd';
                 } else if ($hours < 0) {
                     $h->status='removed';
-                    $h->description='Leraar ' . $user . ' heeft ' . $hours . ' uren verwijderd';
+                    $h->description='Student ' . $user . ' heeft ' . $hours . ' uren verwijderd';
                 }
                 $h->save();
 
                 if ($user == Auth::user()->id) {
-                    return redirect('overview/' . $user)->with('success','Uren zijn opgeslagen.');
+                    return redirect('overview/' . $user)->with('success','Uren zijn aangevraagd.');
                 }
-                return redirect('students/view/' . $user)->with('success','Uren zijn opgeslagen.');
             }
     }
 
-    public function acceptHoursRequest($project)
+    //accepts a requested hour record
+    public function acceptHoursRequest($hourId, $hours)
     {
-        $project = Project::find($project);
-        if ($project == null) abort(404);
+        $hour = Hour::where('hour_id', $hourId)->first();
+        if ($hour == null) abort(404);
         // TODO: redirect to error page with meaningful message 'given project does not exist'
 
         $user = Auth::user();
         if ($user == null) abort(404);
         // TODO: redirect to error page with meaningful message 'given project does not exist'
 
-        $projectId = $project->id;
         $userId = $user->id;
 
-        $projectUser = DB::table('project_user')->where('project_id', $projectId)->where('user_id', $userId)->get();
-        if ($projectUser == null || isset($projectUser[0]) == false) abort(404);
+        if ($hours > 0) {
+            $hour = Hour::where('hour_id', $hourId)->update(['status' => 'added', 'description' => 'Client ' . $user->id . ' heeft ' . $hours . ' uren geaccepteerd']);
+        } else {
+            $hour = Hour::where('hour_id', $hourId)->update(['status' => 'removed', 'description' => 'Client ' . $user->id . ' heeft ' . $hours . ' uren geaccepteerd']);
+        }
+        return redirect('clients/view/' . $userId)->with('success','Uren zijn geaccepteerd.');
+    }
 
-        $projectUserId = $projectUser[0]->id;
+    //rejects a requested hour record
+    public function rejectHoursRequest($hourId, $hours)
+    {
+        $hour = Hour::where('hour_id', $hourId)->first();
+        if ($hour == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
 
-        //$projectUser = ProjectUser::where(['project_id'=>$projectId, 'user_id'=>$userId]);
-        // TODO: fix this, because this should work and is somewhat simpeler
+        $user = Auth::user();
+        if ($user == null) abort(404);
+        // TODO: redirect to error page with meaningful message 'given project does not exist'
 
-        dd($projectUserId);
+        $userId = $user->id;
 
+        $hour = Hour::where('hour_id', $hourId)->update(['status' => 'rejected', 'description' => 'Client ' . $user->id . ' heeft ' . $hours . ' uren afgewezen']);
+        return redirect('clients/view/' . $userId)->with('success','Uren zijn afgewezen.');
     }
 
     /**
