@@ -9,15 +9,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'register' => true]);
 Route::get('/api', 'HoursController@apitest');
 Route::get('/', function () {
     return redirect('home');
 });
-Route::get('/welcome', 'UsersController@welcome');
+Route::get('/welcome', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::group(['middleware' => ['auth']], function () {
+
 
     Route::get('changepassword', 'ChangePasswordController@index');
     Route::post('changepassword', 'ChangePasswordController@store')->name('change.password');
@@ -63,7 +65,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/add', 'Auth\RegisterController@showRegistrationForm')->name('add');
         Route::post('/add', 'Auth\RegisterController@register');
-
 
     });
 });

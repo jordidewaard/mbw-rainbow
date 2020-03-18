@@ -47,7 +47,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        -->
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mailadres') }}</label>
 
@@ -66,7 +66,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="checkbox" id="checkbox" value="1">
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Client') }}
+                                        {{ __('Opdrachtgever') }}
                                     </label>
                                 </div>
                                 <div class="form-check">

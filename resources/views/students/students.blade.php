@@ -4,7 +4,7 @@
 
 <div class="container">
     <a href="/home" class="btn btn-outline-secondary">Ga terug naar home</a>
-    <a href="/add" class="btn btn-outline-primary row-fix">Student Toevoegen/Verwijderen</a>
+    <a href="/add" class="btn btn-outline-primary row-fix">Student Toevoegen</a>
 
     <br><br>
     
