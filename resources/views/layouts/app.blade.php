@@ -37,6 +37,10 @@
         </main>
     </div>
 
+    <!-- footer -->
+    @include('layouts.footer')
+    <!-- end footer -->
+
     <script src="{{ asset('/js/app.js') }}"></script>
 
     <script>window.setTimeout(function() {

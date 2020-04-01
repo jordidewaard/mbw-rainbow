@@ -1,29 +1,35 @@
+<style>
+    .centering {
+        text-align: center;
+    }
 
+    body {
+        font-family: "Nunito", sans-serif; 
+    }
+
+</style>
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center hpBlocks">
-            <div class="col-sm-3">
-                    <div class="card bg-Blue">
-                        <svg class="card-img-top" xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 24 24"></svg>
-                        <div class="card-body">
-                            {{ Auth::user()->name }}
-                            @if (Route::has('login'))
-                                <div class="top-right links">
-                                    @auth
-                                        <a href="{{ url('/home') }}">Home</a>
-                                    @else
-                                        <a href="{{ route('login') }}">Login</a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
-                            @endif
-                        </div>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <div class="container centering">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Profiel</div>
+                    <div class="card-body">
+                        <i class="fa fa-user"></i> Naam: {{ Auth::user()->name }}
+                    <br>
+                        <i class="fa fa-envelope-square"></i> Email: {{ Auth::user()->email }}
+                    <br><br>
+                        <a class="linksonprofile" href="/changepassword">
+                           Wachtwoord veranderen
+                        </a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
