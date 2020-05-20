@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('changepassword', 'ChangePasswordController@store')->name('change.password');
     Route::resource('/form', 'FormController');
     Route::resource('/projects', 'ProjectsController');
+    Route::get('/projectslist', 'ProjectsController@listindex');
     Route::get('/projects/view/{id}', 'ProjectsController@show');
     Route::get('/projects/delete/{id}', 'ProjectsController@delete');
     Route::get('/project/{id}/addstudents', 'ProjectsController@addStudentsToProject');

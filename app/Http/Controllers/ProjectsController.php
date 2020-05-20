@@ -27,6 +27,12 @@ class ProjectsController extends Controller
         return view('projects.projects')->with('projects', $projects);
     }
 
+    public function listindex()
+    {
+        $projects = Project::orderBy('updated_at', 'desc')->withTrashed()->paginate(12);
+        return view('projects.projectslist')->with('projects', $projects);
+    }
+
 
 
     /**
