@@ -22,8 +22,12 @@
                         <i class="fa fa-envelope-square"></i> Email: {{ Auth::user()->email }}
                     <br><br>
                         <b>Projecten:</b>
-                    <br>
-                        <i class="">@foreach( Auth::user()->projects as $project )<li><a href="{{ $project->link }}">{{ $project->title }}</a></li> @endforeach</i>
+                    <br>@if(count($projects) > 0)
+                        <i class="">@foreach( Auth::user()->projects as $project )<li><a href="{{ $project->link }}">{{ $project->title }}</a></li>
+                            @endforeach</i>
+                        @else
+                            <p>Er zijn geen projecten</p>
+                        @endif
                     <br>
                         <br>
                         <a class="linksonprofile" href="/changepassword">

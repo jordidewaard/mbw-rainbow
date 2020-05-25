@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/add', 'Auth\RegisterController@showRegistrationForm')->name('add');
         Route::post('/add', 'Auth\RegisterController@register');
+        Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+        Route::post('/register', 'Auth\RegisterController@register');
 
     });
 });
