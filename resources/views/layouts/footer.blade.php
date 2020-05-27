@@ -20,5 +20,6 @@
 </style>
 
 <div class="footer">
-    <p>Laravel: {{ app()->version() }}</p>
+    <p>Laravel: {{ app()->version() }}
+    - <?php echo date('Y-m-d');?></p>
 </div>
