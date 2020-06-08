@@ -23,6 +23,7 @@
             {{Form::label('client', 'Opdrachtgever')}}
             {{Form::select('clientUser', $users, null, ['class' => 'form-control editor', 'placeholder' => 'Selecteer Opdrachtgever...'])}}
         </div>
+
         <div class="form-group">
             {{Form::label('link', 'Trello Bord')}}
             {!!Form::text('link','', ['id' => '', 'class' => 'form-control editor', 'placeholder' => 'Link...'])!!}

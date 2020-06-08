@@ -31,6 +31,10 @@
                         <a class="linksonprofile" href="/changepassword">
                            Wachtwoord veranderen
                         </a>
+                        <div class="form-group">
+                            {{Form::label('client', 'Opdrachtgever')}}
+                            {{Form::select('clientUser', $users, null, ['class' => 'form-control editor', 'placeholder' => 'Selecteer Opdrachtgever...'])}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,3 +42,4 @@
     </div>
     </body>
 @endsection
+
