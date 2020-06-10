@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/students', 'StudentsController');
         Route::get('/students/view/{projectUserId}/hours', 'HoursController@show');
         Route::get('/students/view/{id}', 'StudentsController@show');
+        Route::resource('/clients', 'UsersController@client');
         Route::get('/clients', 'UsersController@client');
         Route::get('/clients/view/{id}', 'UsersController@showClient');
 
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add', 'Auth\RegisterController@register');
         Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
         Route::post('/register', 'Auth\RegisterController@register');
+        Route::resource('/register', 'UsersController@client');
 
     });
 });
